@@ -1,0 +1,94 @@
+managed; // implementation in class zbp_rk_i_doc_head unique;
+
+define behavior for zrk_i_doc_head alias Head
+persistent table zrk_a_doc_head
+lock master
+//authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  association _Plant { create; }
+  association _Items { create; }
+
+  field ( numbering : managed, readonly ) DocUuid;
+
+  mapping for zrk_a_doc_head
+  {
+    DocUuid = doc_uuid;
+    ObjectType = object_type;
+    ObjectId = object_id;
+    Title = title;
+    RespBuyer = resp_buyer;
+    Supplier = supplier;
+    Avob = avob;
+    CurrencyCode = currency_code;
+    ValidFrom = valid_from;
+    ValidTo = valid_to;
+    SendVia = send_via;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+
+  }
+}
+
+define behavior for zrk_i_doc_plant alias Plant
+persistent table zrk_a_doc_plant
+lock dependent by _Head
+{
+
+  update;
+  delete;
+
+  association _Head;
+
+  field ( numbering : managed, readonly ) PlantUuid;
+  field ( readonly : update ) DocUuid;
+
+  mapping for zrk_a_doc_plant
+  {
+
+    PlantUuid = plant_uuid;
+    DocUuid = doc_uuid;
+    PlantId = plant_id;
+    TrnsTerm = trns_term;
+    TrnsCity = trns_city;
+  }
+
+}
+
+
+define behavior for ZRK_I_DOC_ITEM alias Items
+persistent table zrk_a_doc_item
+lock dependent by _Head
+{
+
+  update;
+  delete;
+
+  association _Head;
+
+  field ( numbering : managed, readonly ) ItemUuid;
+  field ( readonly : update ) DocUuid;
+
+  mapping for zrk_a_doc_item
+  {
+
+    ItemUuid = item_uuid;
+    DocUuid = doc_uuid;
+    ItemNo = item_no;
+    PartNo = part_no;
+    CommCode = comm_code;
+    Quantity = quantity;
+    Unit = unit;
+    Price = price;
+    Currency = currency;
+
+  }
+
+}

@@ -1,0 +1,25 @@
+projection;
+
+define behavior for zrk_c_doc_head alias Head
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Plant { create ; }
+  use association _Items { create ; }
+}
+
+define behavior for ZRK_C_DOC_PLANT alias Plant {
+	use update;
+	use delete;
+	
+	use association _Head { }
+}
+
+define behavior for Zrk_c_doc_item alias Items {
+	use update;
+    use delete;
+
+    use association _Head { }
+}

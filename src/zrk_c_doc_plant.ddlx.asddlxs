@@ -1,0 +1,30 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Plant',
+                typeNamePlural: 'Plants',
+                title: { type: #STANDARD, value: 'PlantId' } } }
+annotate view ZRK_C_DOC_PLANT with
+{
+  @UI.facet: [ { id:            'Plant',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Plant',
+                 position:      10 }  ]
+  @UI.hidden: true
+  PlantUuid;
+  @UI.hidden: true
+  DocUuid;
+  @UI: { lineItem:       [ { position: 10 } ],
+     identification: [ { position: 10 } ] }
+  PlantId;
+  @UI: { lineItem:       [ { position: 20 } ],
+     identification: [ { position: 20 } ] }
+  Name;
+  @UI: { lineItem:       [ { position: 30 , label: 'Transport term' } ],
+     identification: [ { position: 30 , label: 'Transport term' } ] }
+  TrnsTerm;
+  @UI: { lineItem:       [ { position: 40 , label: 'Transport city'} ],
+     identification: [ { position: 40 , label: 'Transport city'} ] }
+  TrnsCity;
+
+}

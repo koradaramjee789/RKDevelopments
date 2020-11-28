@@ -1,0 +1,44 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Item',
+                typeNamePlural: 'Items',
+                title: { type: #STANDARD, value: 'ItemNo' , valueQualifier: 'PartNo' } } }
+annotate view ZRK_C_DOC_ITEM with
+{
+  @UI.facet: [ { id:            'General',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'General',
+                 position:      30 }  ]
+
+  @UI.hidden: true
+  ItemUuid;
+  @UI.hidden: true
+  DocUuid;
+
+  @UI: { lineItem:       [ { position: 10 } ],
+  identification: [ { position: 10 } ] }
+  ItemNo;
+  @UI: { lineItem:       [ { position: 20 } ],
+  identification: [ { position: 20 } ] }
+  PartNo;
+  @UI: { lineItem:       [ { position: 30 } ],
+  identification: [ { position: 30 } ] }
+  CommCode;
+  @UI: { lineItem:       [ { position: 40 } ],
+  identification: [ { position: 40 } ] }
+  Quantity;
+  @UI: { lineItem:       [ { position: 50 , label: 'Unit'} ],
+  identification: [ { position: 50 , label: 'Unit'} ] }
+  Unit;
+  @UI: { lineItem:       [ { position: 60 , label: 'Price'} ],
+  identification: [ { position: 60 , label: 'Price'} ] }
+  Price;
+  @UI: { lineItem:       [ { position: 70 } ],
+  identification: [ { position: 70 } ]  }
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_Currency',
+    element: 'Currency' } } ]
+  Currency;
+
+
+}

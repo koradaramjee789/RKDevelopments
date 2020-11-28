@@ -1,0 +1,80 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Purchase contract',
+    typeNamePlural: 'Purchase contracts',
+    title: {
+        type: #STANDARD,
+        label: 'Contract',
+        value: 'ObjectId'
+    }
+}
+annotate view zrk_c_doc_head with
+{
+
+  @UI.facet: [ { id:              'Travel',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Header',
+                   position:        10 },
+
+               { id:              'Plant',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Plants',
+                 position:        20,
+                 targetElement:   '_Plant'} ,
+
+               { id:              'Items',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Items',
+                 position:        30,
+                 targetElement:   '_Items'}
+
+                 ]
+
+  @UI.hidden: true
+  @UI:{ identification: [{ position: 1, label: 'Document UUID' }] }
+  DocUuid;
+
+  @UI.hidden: true
+  ObjectType;
+
+  @UI:{ lineItem: [{ position: 10 , label: 'Contract No.' }] ,
+        identification: [{ position: 10, label: 'Contract No.'  }] ,
+        selectionField: [{ position: 10 }] }
+  ObjectId;
+  @UI:{ lineItem: [{ position: 20  }] ,
+        identification: [{ position: 20 }] ,
+        selectionField: [{ position: 20 }] }
+  Title;
+  @UI:{ lineItem: [{ position: 30 , label: 'Responsible buyer' }] ,
+      identification: [{ position: 30 , label: 'Responsible buyer'}] ,
+      selectionField: [{ position: 30 }] }
+  RespBuyer;
+  //    RespBuyerName;
+  @UI:{ lineItem: [{ position: 40 , label: 'Supplier' }] ,
+     identification: [{ position: 40 ,label: 'Supplier'  }] ,
+     selectionField: [{ position: 40 }] }
+  Supplier;
+  //    SupplierName;
+  @UI:{ lineItem: [{ position: 50 , label: 'AVoB' }] ,
+   identification: [{ position: 50 ,label: 'AVoB'  }] }
+  Avob;
+  //    CurrencyCode;
+  @UI:{ lineItem: [{ position: 70 , label: 'Valid From' }] ,
+   identification: [{ position: 70 ,label: 'Valid From'  }] }
+  ValidFrom;
+  @UI:{ lineItem: [{ position: 80 , label: 'Valid To' }] ,
+  identification: [{ position: 80 ,label: 'Valid To'  }] }
+  ValidTo;
+  @UI:{ lineItem: [{ position: 60 , label: 'Send Via' }] ,
+   identification: [{ position: 60 ,label: 'Send Via'  }] }
+  SendVia;
+
+  @UI.hidden: true
+  LastChangedAt;
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+}
