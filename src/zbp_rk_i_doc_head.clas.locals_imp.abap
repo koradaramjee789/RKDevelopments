@@ -123,8 +123,8 @@ CLASS lhc_Head IMPLEMENTATION.
         AS objectId
         INTO @DATA(lv_max_object_id).
 
-    IF sy-subrc NE 0.
-        lv_max_object_id = 29990001.
+    IF lv_max_object_id IS INITIAL.
+        lv_max_object_id = 29990000.
     ENDIF.
 
     MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE

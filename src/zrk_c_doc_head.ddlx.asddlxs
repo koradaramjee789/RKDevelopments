@@ -1,17 +1,19 @@
 @Metadata.layer: #CORE
 @UI.headerInfo: {
-    typeName: 'Purchase contract',
-    typeNamePlural: 'Purchase contracts',
+    typeName: 'Purchase Contract',
+    typeNamePlural: 'Purchase Contracts',
     title: {
         type: #STANDARD,
         label: 'Contract',
         value: 'ObjectId'
-    }
+    },
+    description.value: 'Title',
+    description.type: #STANDARD
 }
 annotate view zrk_c_doc_head with
 {
 
-  @UI.facet: [ { id:              'Travel',
+  @UI.facet: [ { id:              'Head',
                    purpose:         #STANDARD,
                    type:            #IDENTIFICATION_REFERENCE,
                    label:           'Header',
@@ -41,7 +43,7 @@ annotate view zrk_c_doc_head with
   ObjectType;
 
   @UI:{ lineItem: [{ position: 10 , label: 'Contract No.' }] ,
-        identification: [{ position: 10, label: 'Contract No.'  }] ,
+        identification: [  { position: 10, label: 'Contract No.' , hidden: true  }] ,
         selectionField: [{ position: 10 }] }
   ObjectId;
   @UI:{ lineItem: [{ position: 20  }] ,
@@ -70,7 +72,7 @@ annotate view zrk_c_doc_head with
   ValidTo;
   @UI:{ lineItem: [{ position: 60 , label: 'Send Via' }] ,
    identification: [{ position: 60 ,label: 'Send Via'  }] }
-   @Consumption.valueHelpDefinition: [ { entity.element: 'SendVia' , entity.name: 'ZRK_I_SEND_VIA' }]
+  @Consumption.valueHelpDefinition: [ { entity.element: 'SendVia' , entity.name: 'ZRK_I_SEND_VIA' }]
   SendVia;
 
   @UI.hidden: true
