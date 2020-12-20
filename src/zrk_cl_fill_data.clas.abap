@@ -30,16 +30,27 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *    commit WORK.
 
 
-    DATA lt_plant TYPE TABLE OF zrk_md_plant.
+*    DATA lt_plant TYPE TABLE OF zrk_md_plant.
+*
+*    lt_plant = VALUE #( ( plant_id = '1350' name = 'RK Manufactures Pvt, Hyderabad' )
+*                        ( plant_id = '2350' name = 'RK Manufactures Pvt, Bangalore' )
+*                        ( plant_id = '3350' name = 'RK Manufactures Pvt, Pune' )
+*                        ( plant_id = '4350' name = 'RK Manufactures Pvt, Mumbai' )
+*                        ( plant_id = '5350' name = 'RK Manufactures Pvt, Chennai' ) ).
+*
+*
+*    MODIFY  zrk_md_plant FROM TABLE @lt_plant.
+*
+*    COMMIT WORK.
 
-    lt_plant = VALUE #( ( plant_id = '1350' name = 'RK Manufactures Pvt, Hyderabad' )
-                        ( plant_id = '2350' name = 'RK Manufactures Pvt, Bangalore' )
-                        ( plant_id = '3350' name = 'RK Manufactures Pvt, Pune' )
-                        ( plant_id = '4350' name = 'RK Manufactures Pvt, Mumbai' )
-                        ( plant_id = '5350' name = 'RK Manufactures Pvt, Chennai' ) ).
+    DATA : lt_send_via TYPE TABLE OF zrk_md_send_via.
 
+    lt_send_via = VALUE #( ( send_via = 'EDC' send_via_t = 'EDoc' )
+    ( send_via = 'MAI' send_via_t = 'Email' )
+    ( send_via = 'PRN' send_via_t = 'Print' )
+    ( send_via = 'GST' send_via_t = 'Guest' ) ).
 
-    MODIFY  zrk_md_plant FROM TABLE @lt_plant.
+    MODIFY zrk_md_send_via FROM TABLE @lt_send_via.
 
     COMMIT WORK.
 

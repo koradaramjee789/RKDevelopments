@@ -1,18 +1,24 @@
 @EndUserText.label: 'projection for document items'
 @AccessControl.authorizationCheck: #CHECK
 @Metadata.allowExtensions: true
-define view entity ZRK_C_DOC_ITEM 
-as projection on ZRK_I_DOC_ITEM {
-    key ItemUuid,
-    DocUuid,
-    ItemNo,
-    PartNo,
-    CommCode,
-    Quantity,
-    Unit,
-    Price,
-    Currency,
+define view entity ZRK_C_DOC_ITEM
+  as projection on ZRK_I_DOC_ITEM
+{
+  key     DocUuid,
+  key     ItemUuid,
 
-    /* Associations */
-    _Head : redirected to parent zrk_c_doc_head
+          ItemNo,
+          PartNo,
+          CommCode,
+          Quantity,
+          Unit,
+          Price,
+          Currency,
+          CreatedBy,
+          LastChangedBy,
+          LocalLastChangedAt,
+          /* Associations */
+          _Head  : redirected to parent zrk_c_doc_head,
+
+          _Conds : redirected to composition child ZRK_C_ITEM_COND
 }

@@ -17,9 +17,9 @@ annotate view ZRK_C_DOC_PLANT with
   @UI: { lineItem:       [ { position: 10 } ],
      identification: [ { position: 10 } ] }
   PlantId;
-  @UI: { lineItem:       [ { position: 20 } ],
-     identification: [ { position: 20 } ] }
-  Name;
+//  @UI: { lineItem:       [ { position: 20 } ],
+//     identification: [ { position: 20 } ] }
+//  Name;
   @UI: { lineItem:       [ { position: 30 , label: 'Transport term' } ],
      identification: [ { position: 30 , label: 'Transport term' } ] }
   TrnsTerm;

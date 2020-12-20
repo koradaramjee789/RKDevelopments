@@ -3,8 +3,10 @@ define service Zrk_ui_doc_head {
   expose zrk_c_doc_head as Head;
   expose ZRK_C_DOC_PLANT as Plant;
   expose ZRK_C_DOC_ITEM as Items;
+  expose ZRK_C_ITEM_COND as Conds;
   expose zrk_i_buyer as BuyerF4;
   expose zrk_i_supplier as SupplierF4;
   expose zrk_i_plant as PlantF4;
   expose I_Currency as CurrencyF4;
+  expose ZRK_I_SEND_VIA as SendViaF4;
 }

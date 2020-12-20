@@ -9,11 +9,14 @@ define view entity ZRK_C_DOC_PLANT
       @Consumption.valueHelpDefinition: [{ entity: {
           name: 'zrk_i_plant',
           element: 'PlantId'
-      },
-      additionalBinding: [{ localElement: 'Name', element: 'Name' }] 
+      }
+//      ,
+//      additionalBinding: [{ localElement: 'Name', element: 'Name' }] 
       }]
-      PlantId,
-      _PlantDt.Name,
+      
+      @ObjectModel.text.element: ['Name']
+      PlantId,   
+      _PlantDt.Name as Name,
       TrnsTerm,
       TrnsCity,
       /* Associations */

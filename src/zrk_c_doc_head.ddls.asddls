@@ -29,8 +29,9 @@ define root view entity zrk_c_doc_head
       CurrencyCode,
       ValidFrom,
       ValidTo,
+//      @ObjectModel.text.element: ['SendViaT']
       SendVia,
-      
+      _SendVia.SendViaT as SendViaT,
       
       CreatedBy,
       CreatedAt,
@@ -43,6 +44,7 @@ define root view entity zrk_c_doc_head
       
       _Plant :  redirected to composition child ZRK_C_DOC_PLANT,
       _Items : redirected to composition child ZRK_C_DOC_ITEM,
+      
       _Currency,
       _RespBuyer,
       _Supplier

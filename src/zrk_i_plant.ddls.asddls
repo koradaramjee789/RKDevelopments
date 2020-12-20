@@ -7,10 +7,11 @@
 define view zrk_i_plant
   as select from zrk_md_plant
 {
-
+      @ObjectModel.text.element: ['Name']
   key plant_id as PlantId,
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold : 0.8
       @Search.ranking : #HIGH
+      @Semantics.text: true
       name     as Name
 }

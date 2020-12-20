@@ -9,7 +9,14 @@ annotate view ZRK_C_DOC_ITEM with
                  purpose:       #STANDARD,
                  type:          #IDENTIFICATION_REFERENCE,
                  label:         'General',
-                 position:      30 }  ]
+                 position:      10 },
+
+               { id:              'Conditions',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Conditions',
+                 position:        20,
+                 targetElement:   '_Conds'}  ]
 
   @UI.hidden: true
   ItemUuid;

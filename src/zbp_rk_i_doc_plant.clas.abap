@@ -1,0 +1,5 @@
+CLASS zbp_rk_i_doc_plant DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zrk_i_doc_head.
+ENDCLASS.
+
+CLASS zbp_rk_i_doc_plant IMPLEMENTATION.
+ENDCLASS.

@@ -70,6 +70,7 @@ annotate view zrk_c_doc_head with
   ValidTo;
   @UI:{ lineItem: [{ position: 60 , label: 'Send Via' }] ,
    identification: [{ position: 60 ,label: 'Send Via'  }] }
+   @Consumption.valueHelpDefinition: [ { entity.element: 'SendVia' , entity.name: 'ZRK_I_SEND_VIA' }]
   SendVia;
 
   @UI.hidden: true

@@ -11,6 +11,7 @@ define root view entity zrk_i_doc_head
   association [0..1] to zrk_i_supplier as _Supplier  on $projection.Supplier = _Supplier.SupplierId
   association [0..1] to zrk_i_buyer    as _RespBuyer on $projection.RespBuyer = _RespBuyer.RespBuyerId
   association [0..1] to I_Currency     as _Currency  on $projection.CurrencyCode = _Currency.Currency
+  association [0..1] to ZRK_I_SEND_VIA     as _SendVia  on $projection.SendVia = _SendVia.SendVia
 {
   key doc_uuid              as DocUuid,
       object_type           as ObjectType,
@@ -44,5 +45,6 @@ define root view entity zrk_i_doc_head
       
       _RespBuyer,
       _Supplier,
-      _Currency
+      _Currency,
+      _SendVia
 }

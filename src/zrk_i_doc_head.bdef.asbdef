@@ -1,19 +1,27 @@
 managed; // implementation in class zbp_rk_i_doc_head unique;
+with draft;
 
 define behavior for zrk_i_doc_head alias Head
+implementation in class zbp_rk_i_doc_head unique
 persistent table zrk_a_doc_head
-lock master
-//authorization master ( instance )
-//etag master <field_name>
+draft table zrk_d_doc_head
+lock master total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
 {
   create;
   update;
   delete;
 
-  association _Plant { create; }
-  association _Items { create; }
+  association _Plant { create; with draft; }
+  association _Items { create; with draft; }
 
   field ( numbering : managed, readonly ) DocUuid;
+
+  action extendDoc result [1] $self;
+
+  determination initializeDoc on modify { create; }
+  determination setSendVia on modify { field Supplier ;  create ; }
 
   mapping for zrk_a_doc_head
   {
@@ -38,14 +46,17 @@ lock master
 }
 
 define behavior for zrk_i_doc_plant alias Plant
+implementation in class zbp_rk_i_doc_plant unique
 persistent table zrk_a_doc_plant
+draft table zrk_d_doc_plant
 lock dependent by _Head
+authorization dependent by _Head
 {
 
   update;
   delete;
 
-  association _Head;
+  association _Head { with draft; }
 
   field ( numbering : managed, readonly ) PlantUuid;
   field ( readonly : update ) DocUuid;
@@ -58,20 +69,26 @@ lock dependent by _Head
     PlantId = plant_id;
     TrnsTerm = trns_term;
     TrnsCity = trns_city;
+
   }
 
 }
 
 
 define behavior for ZRK_I_DOC_ITEM alias Items
+implementation in class zbp_rk_i_doc_item unique
 persistent table zrk_a_doc_item
+draft table zrk_d_doc_item
 lock dependent by _Head
+authorization dependent by _Head
 {
 
   update;
   delete;
 
-  association _Head;
+  association _Conds { create; with draft; }
+
+  association _Head { with draft; }
 
   field ( numbering : managed, readonly ) ItemUuid;
   field ( readonly : update ) DocUuid;
@@ -86,6 +103,42 @@ lock dependent by _Head
     CommCode = comm_code;
     Quantity = quantity;
     Unit = unit;
+    Price = price;
+    Currency = currency;
+
+
+  }
+
+}
+
+define behavior for zrk_i_item_cond alias Conds
+implementation in class zbp_rk_i_item_cond unique
+persistent table zrk_a_item_cond
+draft table zrk_d_item_cond
+lock dependent by _Head
+authorization dependent by _Head
+
+{
+
+  field ( numbering : managed, readonly ) CondUuid;
+  field ( readonly : update ) ItemUuid, DocUuid;
+
+  update;
+  delete;
+
+  // association _Items { with draft ;}
+  association _Head { with draft; }
+
+
+
+  mapping for zrk_a_item_cond
+
+  {
+
+    CondUuid = cond_uuid;
+    ItemUuid = item_uuid;
+    DocUuid = doc_uuid;
+    CondType = cond_type;
     Price = price;
     Currency = currency;
 
