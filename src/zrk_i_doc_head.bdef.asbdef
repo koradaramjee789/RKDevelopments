@@ -17,6 +17,7 @@ etag master LocalLastChangedAt
   association _Items { create; with draft; }
 
   field ( numbering : managed, readonly ) DocUuid;
+  field ( readonly ) ObjectId;
 
   action extendDoc result [1] $self;
 
