@@ -123,6 +123,10 @@ CLASS lhc_Head IMPLEMENTATION.
         AS objectId
         INTO @DATA(lv_max_object_id).
 
+    IF sy-subrc NE 0.
+        lv_max_object_id = 29990001.
+    ENDIF.
+
     MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
         ENTITY Head
         UPDATE FIELDS ( ObjectId  )
