@@ -22,6 +22,7 @@ etag master LocalLastChangedAt
   action extendDoc result [1] $self;
 
   determination initializeDoc on modify { create; }
+  determination GenerateObjectId on save { create; }
   determination setSendVia on modify { field Supplier ;  create ; }
 
   mapping for zrk_a_doc_head

@@ -12,6 +12,8 @@ CLASS lhc_Head DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR Head~initializeDoc.
     METHODS setSendVia FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Head~setSendVia.
+    METHODS GenerateObjectId FOR DETERMINE ON SAVE
+      IMPORTING keys FOR Head~GenerateObjectId.
 
 ENDCLASS.
 
@@ -103,5 +105,83 @@ CLASS lhc_Head IMPLEMENTATION.
     reported = CORRESPONDING #( DEEP lt_update_reported ).
 
   ENDMETHOD.
+
+  METHOD GenerateObjectId.
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        FIELDS ( ObjectId ) WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_doc_head).
+
+    DELETE lt_doc_head WHERE ObjectId IS NOT INITIAL.
+
+    CHECK lt_doc_head IS NOT INITIAL.
+
+    SELECT SINGLE
+        FROM zrk_a_doc_head
+        FIELDS MAX( object_id )
+        AS objectId
+        INTO @DATA(lv_max_object_id).
+
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        UPDATE FIELDS ( ObjectId  )
+        WITH VALUE #( FOR <fs_rec> IN lt_doc_head INDEX INTO i
+            ( %tky = <fs_rec>-%tky
+              ObjectId = lv_max_object_id + 1
+              %control-ObjectId = if_abap_behv=>mk-on ) )
+              REPORTED DATA(lt_update_reported).
+
+    reported = CORRESPONDING #( DEEP lt_update_reported ).
+
+  ENDMETHOD.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ENDCLASS.
