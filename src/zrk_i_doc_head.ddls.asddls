@@ -25,6 +25,7 @@ define root view entity zrk_i_doc_head
       valid_from            as ValidFrom,
       valid_to              as ValidTo,
       send_via              as SendVia,
+      _SendVia.SendViaT     as SendViaT,
 
       @Semantics.user.createdBy: true
       created_by            as CreatedBy,

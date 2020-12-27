@@ -31,7 +31,7 @@ define root view entity zrk_c_doc_head
       ValidTo,
 //      @ObjectModel.text.element: ['SendViaT']
       SendVia,
-      _SendVia.SendViaT as SendViaT,
+      SendViaT,
       
       CreatedBy,
       CreatedAt,

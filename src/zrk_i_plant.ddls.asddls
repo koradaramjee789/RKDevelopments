@@ -13,5 +13,6 @@ define view zrk_i_plant
       @Search.fuzzinessThreshold : 0.8
       @Search.ranking : #HIGH
       @Semantics.text: true
+      @EndUserText.quickInfo: 'This is the plant where you would like supplier to deliver goods.'
       name     as Name
 }

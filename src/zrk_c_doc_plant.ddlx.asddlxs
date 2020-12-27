@@ -16,10 +16,11 @@ annotate view ZRK_C_DOC_PLANT with
   DocUuid;
   @UI: { lineItem:       [ { position: 10 } ],
      identification: [ { position: 10 } ] }
+  @EndUserText.quickInfo: 'This is the plant where you would like supplier to deliver goods!'
   PlantId;
-//  @UI: { lineItem:       [ { position: 20 } ],
-//     identification: [ { position: 20 } ] }
-//  Name;
+  //  @UI: { lineItem:       [ { position: 20 } ],
+  //     identification: [ { position: 20 } ] }
+  //  Name;
   @UI: { lineItem:       [ { position: 30 , label: 'Transport term' } ],
      identification: [ { position: 30 , label: 'Transport term' } ] }
   TrnsTerm;

@@ -17,20 +17,28 @@ annotate view zrk_c_doc_head with
                    purpose:         #STANDARD,
                    type:            #IDENTIFICATION_REFERENCE,
                    label:           'Header',
-                   position:        10 },
+                   position:        10 ,
+                   targetQualifier: 'QHead'},
+
+               { id:              'GenInfo',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'General Information',
+                   position:        20 ,
+                   targetQualifier: 'QGenInfo'},
 
                { id:              'Plant',
                  purpose:         #STANDARD,
                  type:            #LINEITEM_REFERENCE,
                  label:           'Plants',
-                 position:        20,
+                 position:        30,
                  targetElement:   '_Plant'} ,
 
                { id:              'Items',
                  purpose:         #STANDARD,
                  type:            #LINEITEM_REFERENCE,
                  label:           'Items',
-                 position:        30,
+                 position:        40,
                  targetElement:   '_Items'}
 
                  ]
@@ -47,31 +55,33 @@ annotate view zrk_c_doc_head with
         selectionField: [{ position: 10 }] }
   ObjectId;
   @UI:{ lineItem: [{ position: 20  }] ,
-        identification: [{ position: 20 }] ,
+        identification: [{ position: 20 , qualifier: 'QHead'}] ,
         selectionField: [{ position: 20 }] }
   Title;
   @UI:{ lineItem: [{ position: 30 , label: 'Responsible buyer' }] ,
-      identification: [{ position: 30 , label: 'Responsible buyer'}] ,
+      identification: [{ position: 30 , label: 'Responsible buyer' ,  qualifier: 'QHead'}] ,
       selectionField: [{ position: 30 }] }
   RespBuyer;
   //    RespBuyerName;
   @UI:{ lineItem: [{ position: 40 , label: 'Supplier' }] ,
-     identification: [{ position: 40 ,label: 'Supplier'  }] ,
+     identification: [{ position: 40 ,label: 'Supplier'  , qualifier: 'QHead'}] ,
      selectionField: [{ position: 40 }] }
   Supplier;
   //    SupplierName;
   @UI:{ lineItem: [{ position: 50 , label: 'AVoB' }] ,
-   identification: [{ position: 50 ,label: 'AVoB'  }] }
+   identification: [{ position: 50 ,label: 'AVoB' ,  qualifier: 'QGenInfo'  }] }
   Avob;
   //    CurrencyCode;
   @UI:{ lineItem: [{ position: 70 , label: 'Valid From' }] ,
-   identification: [{ position: 70 ,label: 'Valid From'  }] }
+   identification: [{ position: 70 ,label: 'Valid From' ,  qualifier: 'QGenInfo'  }] }
+  @EndUserText.quickInfo: 'This is the date from which agreement starts!'
   ValidFrom;
   @UI:{ lineItem: [{ position: 80 , label: 'Valid To' }] ,
-  identification: [{ position: 80 ,label: 'Valid To'  }] }
+  identification: [{ position: 80 ,label: 'Valid To' ,  qualifier: 'QGenInfo' }] }
+  @EndUserText.quickInfo: 'This is the date from which agreement Ends!'
   ValidTo;
   @UI:{ lineItem: [{ position: 60 , label: 'Send Via' }] ,
-   identification: [{ position: 60 ,label: 'Send Via'  }] }
+   identification: [{ position: 60 ,label: 'Send Via' ,  qualifier: 'QGenInfo'  }] }
   @Consumption.valueHelpDefinition: [ { entity.element: 'SendVia' , entity.name: 'ZRK_I_SEND_VIA' }]
   SendVia;
 

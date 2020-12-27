@@ -59,7 +59,7 @@ CLASS lhc_Head IMPLEMENTATION.
 
     READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
       ENTITY Head
-      FIELDS ( ValidFrom ValidTo )
+      FIELDS ( Supplier SendVia SendViaT )
       WITH CORRESPONDING #( keys )
       RESULT DATA(lt_doc_head).
 
@@ -80,7 +80,7 @@ CLASS lhc_Head IMPLEMENTATION.
         OR lv_supplier CP '*8'
         OR lv_supplier CP '*9'.
       lv_send_via = 'PRN'.
-    ELSE.
+    ELSEIF lv_supplier CP '*0'.
       lv_send_via = 'GST'.
     ENDIF.
 
@@ -92,14 +92,20 @@ CLASS lhc_Head IMPLEMENTATION.
       CLEAR lv_send_via_t.
     ENDIF.
 
+lt_doc_head[ 1 ]-SendVia = lv_send_via  .
+lt_doc_head[ 1 ]-SendViaT = lv_send_via_t .
+
+
     MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
         ENTITY Head
         UPDATE
-        FIELDS ( ValidFrom ValidTo )
-        WITH VALUE #( FOR <fs_doc> IN lt_doc_head
-                        ( %tky = <fs_doc>-%tky
-                          SendVia = lv_send_via
-                           ) )
+        FIELDS ( SendVia SendViaT )
+        WITH CORRESPONDING #( lt_doc_head )
+*        WITH VALUE #( FOR <fs_doc> IN lt_doc_head
+*                        ( %tky = <fs_doc>-%tky
+*                          SendVia = lv_send_via
+*                          SendViaT = lv_send_via_t
+*                           ) )
         REPORTED DATA(lt_update_reported).
 
     reported = CORRESPONDING #( DEEP lt_update_reported ).
