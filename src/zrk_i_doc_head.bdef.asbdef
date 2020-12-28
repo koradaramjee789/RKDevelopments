@@ -23,7 +23,7 @@ etag master LocalLastChangedAt
 
   determination initializeDoc on modify { create; }
   determination GenerateObjectId on save { create; }
-  determination setSendVia on modify { field Supplier ; update;  }
+  determination setSendVia on modify { field Supplier ; }
 
   mapping for zrk_a_doc_head
   {
@@ -94,6 +94,8 @@ authorization dependent by _Head
 
   field ( numbering : managed, readonly ) ItemUuid;
   field ( readonly : update ) DocUuid;
+
+  determination initializeItem on modify { create; }
 
   mapping for zrk_a_doc_item
   {
