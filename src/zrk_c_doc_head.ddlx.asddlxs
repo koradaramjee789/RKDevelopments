@@ -43,8 +43,14 @@ annotate view zrk_c_doc_head with
 
                  ]
 
+  @UI: {
+
+  lineItem: [{ type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}]  ,
+  identification : [{ type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}]
+  }
+
   @UI.hidden: true
-  @UI:{ identification: [{ position: 1, label: 'Document UUID' }] }
+  //  @UI:{ identification: [{ position: 1, label: 'Document UUID' }] }
   DocUuid;
 
   @UI.hidden: true

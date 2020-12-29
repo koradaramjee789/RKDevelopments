@@ -14,6 +14,8 @@ CLASS lhc_Head DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR Head~setSendVia.
     METHODS GenerateObjectId FOR DETERMINE ON SAVE
       IMPORTING keys FOR Head~GenerateObjectId.
+    METHODS ReleaseDoc FOR MODIFY
+      IMPORTING keys FOR ACTION Head~ReleaseDoc RESULT result.
 
 ENDCLASS.
 
@@ -137,10 +139,11 @@ CLASS lhc_Head IMPLEMENTATION.
 
     MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
         ENTITY Head
-        UPDATE FIELDS ( ObjectId  )
+        UPDATE FIELDS ( ObjectId Status )
         WITH VALUE #( FOR <fs_rec> IN lt_doc_head INDEX INTO i
             ( %tky = <fs_rec>-%tky
               ObjectId = lv_max_object_id + 1
+              Status = 'SAVED'
               %control-ObjectId = if_abap_behv=>mk-on ) )
               REPORTED DATA(lt_update_reported).
 
@@ -148,52 +151,34 @@ CLASS lhc_Head IMPLEMENTATION.
 
   ENDMETHOD.
 
+  METHOD ReleaseDoc.
 
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+      ENTITY Head
+      FIELDS ( ObjectId ) WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_doc_head).
 
+    CHECK lt_doc_head IS NOT INITIAL.
 
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+     ENTITY Head
+     UPDATE FIELDS ( Status  )
+     WITH VALUE #( FOR <fs_rec> IN lt_doc_head INDEX INTO i
+     ( %tky = <fs_rec>-%tky
+                     Status = 'AWAPR'
+       %control-ObjectId = if_abap_behv=>mk-on ) )
+       REPORTED DATA(lt_update_reported).
 
+    reported = CORRESPONDING #( DEEP lt_update_reported ).
 
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+  ENTITY Head
+  ALL FIELDS  WITH CORRESPONDING #( keys )
+  RESULT lt_doc_head.
 
+    result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
+                                                     %param = <fs_head> ) ).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  ENDMETHOD.
 
 ENDCLASS.

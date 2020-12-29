@@ -35,17 +35,19 @@ annotate view ZRK_C_DOC_ITEM with
   @UI: { lineItem:       [ { position: 40 } ],
   identification: [ { position: 40 } ] }
   Quantity;
-  @UI: { lineItem:       [ { position: 50 , label: 'Unit'} ],
-  identification: [ { position: 50 , label: 'Unit'} ] }
-  Unit;
+//  //  @UI: { lineItem:       [ { position: 50 , label: 'Unit'} ],
+//  //  identification: [ { position: 50 , label: 'Unit'} ] }
+//  @UI.hidden: true
+//  Unit;
   @UI: { lineItem:       [ { position: 60 , label: 'Price'} ],
-  identification: [ { position: 60 , label: 'Price'} ] }
+  identification: [ { position: 60 , label: 'Price'} ] } 
   Price;
-  @UI: { lineItem:       [ { position: 70 } ],
-  identification: [ { position: 70 } ]  }
-  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_Currency',
-    element: 'Currency' } } ]
-  Currency;
+//  //  @UI: { lineItem:       [ { position: 70 } ],
+//  //  identification: [ { position: 70 } ]  }
+//  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_Currency',
+//    element: 'Currency' } } ]
+//  @UI.hidden: true
+//  Currency;
 
 
 }

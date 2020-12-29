@@ -5,13 +5,13 @@ define root view entity zrk_i_doc_head
   as select from zrk_a_doc_head
 
   composition [0..*] of zrk_i_doc_plant as _Plant
-  
-  composition [0..*] of ZRK_I_DOC_ITEM as _Items
-  
-  association [0..1] to zrk_i_supplier as _Supplier  on $projection.Supplier = _Supplier.SupplierId
-  association [0..1] to zrk_i_buyer    as _RespBuyer on $projection.RespBuyer = _RespBuyer.RespBuyerId
-  association [0..1] to I_Currency     as _Currency  on $projection.CurrencyCode = _Currency.Currency
-  association [0..1] to ZRK_I_SEND_VIA     as _SendVia  on $projection.SendVia = _SendVia.SendVia
+
+  composition [0..*] of ZRK_I_DOC_ITEM  as _Items
+
+  association [0..1] to zrk_i_supplier  as _Supplier  on $projection.Supplier = _Supplier.SupplierId
+  association [0..1] to zrk_i_buyer     as _RespBuyer on $projection.RespBuyer = _RespBuyer.RespBuyerId
+  association [0..1] to I_Currency      as _Currency  on $projection.CurrencyCode = _Currency.Currency
+  association [0..1] to ZRK_I_SEND_VIA  as _SendVia   on $projection.SendVia = _SendVia.SendVia
 {
   key doc_uuid              as DocUuid,
       object_type           as ObjectType,
@@ -26,6 +26,7 @@ define root view entity zrk_i_doc_head
       valid_to              as ValidTo,
       send_via              as SendVia,
       _SendVia.SendViaT     as SendViaT,
+      status                as Status,
 
       @Semantics.user.createdBy: true
       created_by            as CreatedBy,
@@ -41,9 +42,9 @@ define root view entity zrk_i_doc_head
 
       /* associations */
       _Plant,
-      
+
       _Items,
-      
+
       _RespBuyer,
       _Supplier,
       _Currency,

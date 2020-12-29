@@ -4,15 +4,18 @@
 define view entity ZRK_C_DOC_ITEM
   as projection on ZRK_I_DOC_ITEM
 {
-  key     DocUuid,
-  key     ItemUuid,
 
+  key     ItemUuid,
+         DocUuid,
           ItemNo,
           PartNo,
           CommCode,
+          @Semantics.quantity.unitOfMeasure: 'Unit'
           Quantity,
           Unit,
+          @Semantics.amount.currencyCode: 'Currency'
           Price,
+          @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency'} }]
           Currency,
           CreatedBy,
           LastChangedBy,

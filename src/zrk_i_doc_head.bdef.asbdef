@@ -20,6 +20,7 @@ etag master LocalLastChangedAt
   field ( readonly ) ObjectId;
 
   action extendDoc result [1] $self;
+  action ReleaseDoc result [1] $self;
 
   determination initializeDoc on modify { create; }
   determination GenerateObjectId on save { create; }
@@ -38,6 +39,7 @@ etag master LocalLastChangedAt
     ValidFrom = valid_from;
     ValidTo = valid_to;
     SendVia = send_via;
+    Status =  status;
     CreatedBy = created_by;
     CreatedAt = created_at;
     LastChangedBy = last_changed_by;
@@ -53,6 +55,7 @@ persistent table zrk_a_doc_plant
 draft table zrk_d_doc_plant
 lock dependent by _Head
 authorization dependent by _Head
+
 {
 
   update;
@@ -83,6 +86,7 @@ persistent table zrk_a_doc_item
 draft table zrk_d_doc_item
 lock dependent by _Head
 authorization dependent by _Head
+etag master LocalLastChangedAt
 {
 
   update;
@@ -109,6 +113,7 @@ authorization dependent by _Head
     Unit = unit;
     Price = price;
     Currency = currency;
+    LocalLastChangedAt = local_last_changed_at;
 
 
   }
@@ -121,7 +126,7 @@ persistent table zrk_a_item_cond
 draft table zrk_d_item_cond
 lock dependent by _Head
 authorization dependent by _Head
-
+etag master LocalLastChangedAt
 {
 
   field ( numbering : managed, readonly ) CondUuid;
@@ -145,6 +150,7 @@ authorization dependent by _Head
     CondType = cond_type;
     Price = price;
     Currency = currency;
+    LocalLastChangedAt = local_last_changed_at;
 
   }
 

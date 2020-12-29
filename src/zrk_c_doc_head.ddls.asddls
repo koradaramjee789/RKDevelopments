@@ -33,6 +33,8 @@ define root view entity zrk_c_doc_head
       SendVia,
       SendViaT,
       
+      Status,
+      
       CreatedBy,
       CreatedAt,
       LastChangedBy,
