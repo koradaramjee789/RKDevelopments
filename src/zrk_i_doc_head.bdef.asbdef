@@ -93,7 +93,7 @@ authorization dependent by _Head
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) ItemUuid;
-  field ( readonly : update ) DocUuid;
+  field ( readonly : update ) DocUuid, ItemNo;
 
   determination initializeItem on modify { create; }
 

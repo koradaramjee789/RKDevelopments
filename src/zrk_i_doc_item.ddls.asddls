@@ -25,3 +25,7 @@ define view entity ZRK_I_DOC_ITEM
 
          _Conds
 }
+
+
+
+

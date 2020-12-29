@@ -29,7 +29,7 @@ define root view entity zrk_c_doc_head
       CurrencyCode,
       ValidFrom,
       ValidTo,
-//      @ObjectModel.text.element: ['SendViaT']
+      @ObjectModel.text.element: ['SendViaT']
       SendVia,
       SendViaT,
       
