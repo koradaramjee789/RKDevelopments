@@ -1,0 +1,10 @@
+@Metadata.layer: #CORE
+annotate entity ZRK_A_Doc_Extend
+    with 
+{
+   @EndUserText.label: 'New validity to:'
+   extend_till; 
+   @EndUserText.label: 'Enter your comments:'
+   comments;
+    
+}

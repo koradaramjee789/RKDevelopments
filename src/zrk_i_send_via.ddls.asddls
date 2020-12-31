@@ -5,6 +5,7 @@
 @EndUserText.label: 'Data definition for Send via'
 @ObjectModel.resultSet.sizeCategory: #XS
 @Search.searchable: true
+@Metadata.allowExtensions: true
 define view ZRK_I_SEND_VIA as select from zrk_md_send_via as SendVia
 {
     @ObjectModel.text.element: ['SendViaT']

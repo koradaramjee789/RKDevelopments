@@ -7,6 +7,14 @@
     <MASTERLANG>E</MASTERLANG>
     <STEXT>Message class for douments</STEXT>
    </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZRK_CM_DOC</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Document cannot be extended into past.</TEXT>
+    </T100>
+   </T100>
   </asx:values>
  </asx:abap>
 </abapGit>

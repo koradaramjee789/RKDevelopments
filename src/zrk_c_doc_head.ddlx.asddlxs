@@ -45,8 +45,13 @@ annotate view zrk_c_doc_head with
 
   @UI: {
 
-  lineItem: [{ type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}]  ,
-  identification : [{ type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}]
+  lineItem: [
+
+  { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 90} ,
+    { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}
+    ]  ,
+  identification : [{ type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100} ,
+    { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 110} ]
   }
 
   @UI.hidden: true
@@ -64,7 +69,7 @@ annotate view zrk_c_doc_head with
         identification: [{ position: 20 , qualifier: 'QHead'}] ,
         selectionField: [{ position: 20 }] }
   Title;
-  @UI:{ lineItem: [{ position: 30 , label: 'Responsible buyer' }] ,
+  @UI:{ lineItem: [{ position: 30 , label: 'Responsible buyer'  } ] ,
       identification: [{ position: 30 , label: 'Responsible buyer' ,  qualifier: 'QHead'}] ,
       selectionField: [{ position: 30 }] }
   RespBuyer;

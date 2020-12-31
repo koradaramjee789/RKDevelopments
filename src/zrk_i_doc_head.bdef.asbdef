@@ -19,12 +19,13 @@ etag master LocalLastChangedAt
   field ( numbering : managed, readonly ) DocUuid;
   field ( readonly ) ObjectId;
 
-  action extendDoc result [1] $self;
+  action extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
   action ReleaseDoc result [1] $self;
 
   determination initializeDoc on modify { create; }
   determination GenerateObjectId on save { create; }
   determination setSendVia on modify { field Supplier ; }
+
 
   mapping for zrk_a_doc_head
   {

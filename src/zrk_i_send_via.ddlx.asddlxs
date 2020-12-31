@@ -1,0 +1,8 @@
+@Metadata.layer: #CORE
+annotate entity ZRK_I_SEND_VIA
+    with 
+{
+    @UI.hidden: true
+    SendViaT;
+    
+}

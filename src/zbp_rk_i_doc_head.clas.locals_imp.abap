@@ -28,6 +28,65 @@ CLASS lhc_Head IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD extendDoc.
+
+    DATA : lt_update_doc  TYPE TABLE FOR UPDATE zrk_i_doc_head.
+    DATA(lt_keys) = keys.
+    DATA(lv_today) = cl_abap_context_info=>get_system_date( ).
+
+    LOOP AT lt_keys ASSIGNING FIELD-SYMBOL(<fs_key>).
+
+      IF <fs_key>-%param-extend_till < lv_today.
+
+        APPEND VALUE #( %tky                = <fs_key>-%tky ) TO failed-head.
+
+        APPEND VALUE #( %tky                = <fs_key>-%tky
+                        %msg                = new_message(  id       = 'ZRK_CM_DOC'
+                                                            number   = '001' " Document cannot be extended into the past
+                                                            severity = if_abap_behv_message=>severity-error )
+                        %element-ValidTo = if_abap_behv=>mk-on ) TO reported-head.
+
+        DELETE lt_keys.
+
+
+      ELSE.
+        DATA(lv_valid_to) = <fs_key>-%param-extend_till.
+      ENDIF.
+
+    ENDLOOP.
+
+    CHECK lt_keys IS NOT INITIAL.
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        FIELDS ( ValidFrom ValidTo )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_doc_head).
+
+
+    CHECK lt_doc_head IS NOT INITIAL.
+
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        UPDATE
+        FIELDS ( ValidTo )
+        WITH VALUE #( FOR <fs_doc> IN lt_doc_head
+                        ( %tky = <fs_doc>-%tky
+                          validTo = COND #( WHEN lv_valid_to IS NOT INITIAL
+                          THEN lv_valid_to
+                          ELSE <fs_doc>-ValidTo )  ) )
+        REPORTED DATA(lt_update_reported).
+
+    reported = CORRESPONDING #( DEEP lt_update_reported ).
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        ALL FIELDS
+        WITH CORRESPONDING #( keys )
+        RESULT lt_doc_head.
+
+    result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
+    %param = <fs_head> ) ).
+
   ENDMETHOD.
 
   METHOD initializeDoc.

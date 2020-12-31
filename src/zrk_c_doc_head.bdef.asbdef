@@ -11,6 +11,7 @@ define behavior for zrk_c_doc_head alias Head
   use association _Items { create; with draft; }
 
   use action ReleaseDoc ;
+  use action extendDoc ;
 
 
 }
