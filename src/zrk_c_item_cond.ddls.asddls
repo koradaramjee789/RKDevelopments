@@ -6,7 +6,9 @@ define view entity ZRK_C_ITEM_COND as projection on zrk_i_item_cond {
     ItemUuid,
     DocUuid,
     CondType,
+    @Semantics.amount.currencyCode: 'Currency'
     Price,
+    @Semantics.currencyCode: true
     Currency,
     CreatedBy,
     LastChangedBy,

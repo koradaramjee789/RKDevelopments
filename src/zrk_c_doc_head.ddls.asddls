@@ -13,6 +13,7 @@ define root view entity zrk_c_doc_head
       @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRK_I_BUYER', element: 'RespBuyerId'} }]
       @ObjectModel.text.element: ['RespBuyerName']
       @Search.defaultSearchElement: true
+      @UI.lineItem: [{type: #AS_CONTACT , value: '_RespBuyer'}]
       RespBuyer,
       _RespBuyer.LastName as RespBuyerName,
       

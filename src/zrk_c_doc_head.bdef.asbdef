@@ -29,8 +29,9 @@ define behavior for ZRK_C_DOC_ITEM alias Items
   use update;
   use delete;
 
-  use association _Head { with draft; }
   use association _Conds { create; with draft; }
+  use association _Head { with draft; }
+
 }
 
 define behavior for ZRK_C_ITEM_COND alias Conds

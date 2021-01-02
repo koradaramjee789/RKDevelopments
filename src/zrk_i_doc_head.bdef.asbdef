@@ -18,6 +18,7 @@ etag master LocalLastChangedAt
 
   field ( numbering : managed, readonly ) DocUuid;
   field ( readonly ) ObjectId;
+  field ( mandatory ) Title , RespBuyer , Supplier ;
 
   action extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
   action ReleaseDoc result [1] $self;
@@ -98,7 +99,8 @@ etag master LocalLastChangedAt
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) ItemUuid;
-  field ( readonly : update ) DocUuid, ItemNo;
+  field ( readonly ) DocUuid, ItemNo;
+  field ( mandatory ) PartNo , CommCode ;
 
   determination initializeItem on modify { create; }
 
@@ -114,7 +116,7 @@ etag master LocalLastChangedAt
     Unit = unit;
     Price = price;
     Currency = currency;
-    LocalLastChangedAt = local_last_changed_at;
+    LocalLastChangedAt = local_last_changed_at ;
 
 
   }
@@ -130,8 +132,6 @@ authorization dependent by _Head
 etag master LocalLastChangedAt
 {
 
-  field ( numbering : managed, readonly ) CondUuid;
-  field ( readonly : update ) ItemUuid, DocUuid;
 
   update;
   delete;
@@ -139,6 +139,8 @@ etag master LocalLastChangedAt
   // association _Items { with draft ;}
   association _Head { with draft; }
 
+  field ( numbering : managed, readonly ) CondUuid;
+  field ( readonly : update ) ItemUuid, DocUuid;
 
 
   mapping for zrk_a_item_cond

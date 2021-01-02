@@ -14,9 +14,7 @@ define view entity zrk_i_item_cond
       item_uuid             as ItemUuid,
       doc_uuid              as DocUuid,
       cond_type             as CondType,
-      @Semantics.amount.currencyCode: 'Currency'
       price                 as Price,
-
       currency              as Currency,
       created_by            as CreatedBy,
       last_changed_by       as LastChangedBy,

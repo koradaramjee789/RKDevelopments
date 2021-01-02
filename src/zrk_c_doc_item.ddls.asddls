@@ -6,7 +6,7 @@ define view entity ZRK_C_DOC_ITEM
 {
 
   key     ItemUuid,
-         DocUuid,
+          DocUuid,
           ItemNo,
           PartNo,
           CommCode,
@@ -21,7 +21,8 @@ define view entity ZRK_C_DOC_ITEM
           LastChangedBy,
           LocalLastChangedAt,
           /* Associations */
-          _Head  : redirected to parent zrk_c_doc_head,
 
-          _Conds : redirected to composition child ZRK_C_ITEM_COND
+
+          _Conds : redirected to composition child ZRK_C_ITEM_COND,
+          _Head  : redirected to parent zrk_c_doc_head
 }
