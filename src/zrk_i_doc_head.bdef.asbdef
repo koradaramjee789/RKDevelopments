@@ -5,7 +5,8 @@ define behavior for zrk_i_doc_head alias Head
 implementation in class zbp_rk_i_doc_head unique
 persistent table zrk_a_doc_head
 draft table zrk_d_doc_head
-lock master total etag LastChangedAt
+lock master
+total etag LastChangedAt
 authorization master ( instance )
 etag master LocalLastChangedAt
 {
@@ -13,19 +14,19 @@ etag master LocalLastChangedAt
   update;
   delete;
 
-  association _Plant { create; with draft; }
-  association _Items { create; with draft; }
+  association _Plant { create ( features : instance ); with draft; }
+  association _Items { create ( features : instance ); with draft; }
 
   field ( numbering : managed, readonly ) DocUuid;
   field ( readonly ) ObjectId;
-  field ( mandatory ) Title , RespBuyer , Supplier ;
+  field ( mandatory ) Title, RespBuyer, Supplier;
 
   action extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
-  action ReleaseDoc result [1] $self;
+  action ( features : instance ) ReleaseDoc result [1] $self;
 
   determination initializeDoc on modify { create; }
   determination GenerateObjectId on save { create; }
-  determination setSendVia on modify { field Supplier ; }
+  determination setSendVia on modify { field Supplier; }
 
 
   mapping for zrk_a_doc_head
@@ -41,7 +42,7 @@ etag master LocalLastChangedAt
     ValidFrom = valid_from;
     ValidTo = valid_to;
     SendVia = send_via;
-    Status =  status;
+    Status = status;
     CreatedBy = created_by;
     CreatedAt = created_at;
     LastChangedBy = last_changed_by;
@@ -57,7 +58,7 @@ persistent table zrk_a_doc_plant
 draft table zrk_d_doc_plant
 lock dependent by _Head
 authorization dependent by _Head
-
+etag master LocalLastChangedAt
 {
 
   update;
@@ -100,7 +101,7 @@ etag master LocalLastChangedAt
 
   field ( numbering : managed, readonly ) ItemUuid;
   field ( readonly ) DocUuid, ItemNo;
-  field ( mandatory ) PartNo , CommCode ;
+  field ( mandatory ) PartNo, CommCode;
 
   determination initializeItem on modify { create; }
 
@@ -116,7 +117,7 @@ etag master LocalLastChangedAt
     Unit = unit;
     Price = price;
     Currency = currency;
-    LocalLastChangedAt = local_last_changed_at ;
+    LocalLastChangedAt = local_last_changed_at;
 
 
   }
@@ -141,6 +142,8 @@ etag master LocalLastChangedAt
 
   field ( numbering : managed, readonly ) CondUuid;
   field ( readonly : update ) ItemUuid, DocUuid;
+
+  determination initializeCondRec on modify { create; }
 
 
   mapping for zrk_a_item_cond

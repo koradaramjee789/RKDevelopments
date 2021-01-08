@@ -55,7 +55,6 @@ annotate view zrk_c_doc_head with
   }
 
   @UI.hidden: true
-  //  @UI:{ identification: [{ position: 1, label: 'Document UUID' }] }
   DocUuid;
 
   @UI.hidden: true
@@ -69,8 +68,8 @@ annotate view zrk_c_doc_head with
         identification: [{ position: 20 , qualifier: 'QHead'}] ,
         selectionField: [{ position: 20 }] }
   Title;
-  @UI:{ lineItem: [{ position: 30 , label: 'Responsible buyer'  } ] ,
-      identification: [{ position: 30 , label: 'Responsible buyer' ,  qualifier: 'QHead'}] ,
+  @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT  } ] ,
+      identification: [{ position: 30 , label: 'Responsible buyer' ,   qualifier: 'QHead'}] ,
       selectionField: [{ position: 30 }] }
   RespBuyer;
   //    RespBuyerName;
@@ -92,7 +91,8 @@ annotate view zrk_c_doc_head with
   @EndUserText.quickInfo: 'This is the date from which agreement Ends!'
   ValidTo;
   @UI:{ lineItem: [{ position: 60 , label: 'Send Via' }] ,
-   identification: [{ position: 60 ,label: 'Send Via' ,  qualifier: 'QGenInfo'  }] }
+   identification: [{ position: 60 ,label: 'Send Via' ,  qualifier: 'QGenInfo'  }] ,
+   selectionField: [{ position: 60 }] }
   @Consumption.valueHelpDefinition: [ { entity.element: 'SendVia' , entity.name: 'ZRK_I_SEND_VIA' }]
   SendVia;
 
