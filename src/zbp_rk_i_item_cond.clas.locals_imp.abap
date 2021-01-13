@@ -29,11 +29,18 @@ CLASS lhc_conds IMPLEMENTATION.
 *      ENDIF.
 *
 *      describe TABLE lt_item_conds LINES DATA(lv_cond_rec).
+
+      IF line_exists( lt_item_conds[ CondType = 'CND1' ] ).
+
+        DATA(lv_cnd1_exists) = abap_true.
+
+      ENDIF.
       LOOP AT lt_item_conds ASSIGNING FIELD-SYMBOL(<fs_item_cond>).
 
         APPEND VALUE #( %tky = <fs_item_cond>-%tky
                         CondType = COND #(
-                            WHEN <fs_item_cond>-CondType IS NOT INITIAL
+*                            WHEN <fs_item_cond>-CondType IS NOT INITIAL
+                            WHEN lv_cnd1_exists IS NOT INITIAL
                             THEN <fs_item_cond>-CondType
                             ELSE'CND1' )
                         Currency = COND #(

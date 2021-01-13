@@ -10,7 +10,7 @@ define view entity ZRK_I_DOC_ITEM
 {
 
   key    item_uuid             as ItemUuid,
-        doc_uuid              as DocUuid,
+  key      doc_uuid              as DocUuid,
          item_no               as ItemNo,
          part_no               as PartNo,
          comm_code             as CommCode,

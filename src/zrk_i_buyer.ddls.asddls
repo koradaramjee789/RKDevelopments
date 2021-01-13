@@ -44,6 +44,7 @@ define view zrk_i_buyer
       Customer.phone_number  as PhoneNumber,
 
       @Semantics.eMail.address
+      @Semantics:{ eMail.type:  [ #WORK ] }
       Customer.email_address as EMailAddress,
 
       /* Associations */

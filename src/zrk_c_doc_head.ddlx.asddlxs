@@ -68,7 +68,7 @@ annotate view zrk_c_doc_head with
         identification: [{ position: 20 , qualifier: 'QHead'}] ,
         selectionField: [{ position: 20 }] }
   Title;
-  @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT  } ] ,
+  @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT , value: '_RespBuyer' } ] ,
       identification: [{ position: 30 , label: 'Responsible buyer' ,   qualifier: 'QHead'}] ,
       selectionField: [{ position: 30 }] }
   RespBuyer;

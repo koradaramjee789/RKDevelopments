@@ -4,8 +4,9 @@ define view entity zrk_i_item_cond
   as select from zrk_a_item_cond as Cond
 
   association        to parent ZRK_I_DOC_ITEM as _Items on  $projection.ItemUuid = _Items.ItemUuid
-                                                        
-
+                                                         and $projection.DocUuid = _Items.DocUuid
+                                                         
+        
   association [1..1] to zrk_i_doc_head        as _Head  on  $projection.DocUuid = _Head.DocUuid
 
 

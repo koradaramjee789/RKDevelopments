@@ -6,7 +6,7 @@ define view entity ZRK_C_DOC_ITEM
 {
 
   key     ItemUuid,
-          DocUuid,
+  key       DocUuid,
           ItemNo,
           PartNo,
           CommCode,
