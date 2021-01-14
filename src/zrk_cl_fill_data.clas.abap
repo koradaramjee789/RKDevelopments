@@ -43,15 +43,35 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *
 *    COMMIT WORK.
 
-    DATA : lt_send_via TYPE TABLE OF zrk_md_send_via.
+*    DATA : lt_send_via TYPE TABLE OF zrk_md_send_via.
+*
+*    lt_send_via = VALUE #( ( send_via = 'EDC' send_via_t = 'EDoc' )
+*    ( send_via = 'MAI' send_via_t = 'Email' )
+*    ( send_via = 'PRN' send_via_t = 'Print' )
+*    ( send_via = 'GST' send_via_t = 'Guest' ) ).
+*
+*    MODIFY zrk_md_send_via FROM TABLE @lt_send_via.
 
-    lt_send_via = VALUE #( ( send_via = 'EDC' send_via_t = 'EDoc' )
-    ( send_via = 'MAI' send_via_t = 'Email' )
-    ( send_via = 'PRN' send_via_t = 'Print' )
-    ( send_via = 'GST' send_via_t = 'Guest' ) ).
+    DELETE FROM zrk_md_comm_code .
 
-    MODIFY zrk_md_send_via FROM TABLE @lt_send_via.
+    DATA : lt_comm_code TYPE TABLE OF zrk_md_comm_code.
+    lt_comm_code = VALUE #(
 
+        ( comm_code =  'CC_525-05' description = 'Archival Storage Materials')
+        ( comm_code =  'CC_525-50' description = 'Books, Accession')
+        ( comm_code =  'CC_530-15' description = 'Attache Cases')
+        ( comm_code =  'CC_540-14' description = 'Lumber, Cedar')
+        ( comm_code =  'CC_540-87' description = 'Siding, Prefinished Particleboard')
+        ( comm_code =  'CC_540-77' description = 'Recycled Lumber')
+        ( comm_code =  'CC_545-46' description = 'Mills, Iron and Steel')
+        ( comm_code =  'CC_545-54' description = 'Planers, Electric')
+        ( comm_code =  'CC_545-82' description = 'Shredder, Metal/wood')
+        ( comm_code =  'CC_555-50' description = 'Stenciling Rollers')
+        ( comm_code =  'CC_557-20' description = 'Brake Parts/linings')
+        ( comm_code =  'CC_557-65' description = 'Steering Components and Parts')
+        ).
+
+    MODIFY zrk_md_comm_code FROM TABLE @lt_comm_code.
     COMMIT WORK.
 
 

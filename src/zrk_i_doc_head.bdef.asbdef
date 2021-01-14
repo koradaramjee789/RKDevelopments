@@ -14,8 +14,8 @@ etag master LocalLastChangedAt
   update;
   delete;
 
-  association _Plant { create ( features : instance ); with draft; }
-  association _Items { create ( features : instance ); with draft; }
+  association _Plant { create ; with draft; }
+  association _Items { create ; with draft; }
 
   field ( numbering : managed, readonly ) DocUuid;
   field ( readonly ) ObjectId;
@@ -27,6 +27,8 @@ etag master LocalLastChangedAt
   determination initializeDoc on modify { create; }
   determination GenerateObjectId on save { create; }
   determination setSendVia on modify { field Supplier; }
+
+  internal action reCalcDocAvob;
 
 
   mapping for zrk_a_doc_head
@@ -100,10 +102,12 @@ etag master LocalLastChangedAt
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) ItemUuid;
-  field ( readonly ) DocUuid, ItemNo;
+  field ( readonly : update ) DocUuid, ItemNo ;
+  field ( readonly ) Price;
   field ( mandatory ) PartNo, CommCode;
 
   determination initializeItem on modify { create; }
+    determination CalculateItemAvob on modify { field Quantity ; }
 
   mapping for zrk_a_doc_item
   {
@@ -142,8 +146,11 @@ etag master LocalLastChangedAt
 
   field ( numbering : managed, readonly ) CondUuid;
   field ( readonly : update ) ItemUuid, DocUuid;
+  field ( readonly ) Currency;
 
   determination initializeCondRec on modify { create; }
+
+  determination CalculateItemPrice on modify { field Price ; }
 
 
   mapping for zrk_a_item_cond

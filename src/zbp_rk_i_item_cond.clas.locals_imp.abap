@@ -4,6 +4,8 @@ CLASS lhc_conds DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS initializeCondRec FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Conds~initializeCondRec.
+    METHODS CalculateItemPrice FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR Conds~CalculateItemPrice.
 
 ENDCLASS.
 
@@ -39,7 +41,6 @@ CLASS lhc_conds IMPLEMENTATION.
 
         APPEND VALUE #( %tky = <fs_item_cond>-%tky
                         CondType = COND #(
-*                            WHEN <fs_item_cond>-CondType IS NOT INITIAL
                             WHEN lv_cnd1_exists IS NOT INITIAL
                             THEN <fs_item_cond>-CondType
                             ELSE'CND1' )
@@ -57,6 +58,25 @@ CLASS lhc_conds IMPLEMENTATION.
         UPDATE FIELDS ( CondType Currency )
         WITH lt_cond_update
        REPORTED DATA(lt_reported).
+
+    reported = CORRESPONDING #( DEEP lt_reported ).
+
+
+  ENDMETHOD.
+
+  METHOD CalculateItemPrice.
+
+    READ ENTITIES Of zrk_i_doc_head IN LOCAL MODE
+        ENTITY Conds BY \_Head
+        FIELDS ( DocUuid )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_head).
+
+    MODIFY ENTITIES of zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        EXECUTE reCalcDocAvob
+        FROM CORRESPONDING #( lt_head )
+        REPORTED DATA(lt_reported).
 
     reported = CORRESPONDING #( DEEP lt_reported ).
 

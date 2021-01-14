@@ -4,6 +4,8 @@ CLASS lhc_items DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS initializeItem FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Items~initializeItem.
+    METHODS CalculateItemAvob FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR Items~CalculateItemAvob.
 
 ENDCLASS.
 
@@ -56,6 +58,25 @@ CLASS lhc_items IMPLEMENTATION.
 
     reported = CORRESPONDING #( DEEP lt_update_reported ).
 
+
+  ENDMETHOD.
+
+  METHOD CalculateItemAvob.
+
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+      ENTITY Items BY \_Head
+      FIELDS ( DocUuid )
+      WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_head).
+
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+        ENTITY Head
+        EXECUTE reCalcDocAvob
+        FROM CORRESPONDING #( lt_head )
+        REPORTED DATA(lt_reported).
+
+    reported = CORRESPONDING #( DEEP lt_reported ).
 
   ENDMETHOD.
 

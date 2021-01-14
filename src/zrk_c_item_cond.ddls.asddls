@@ -9,6 +9,7 @@ define view entity ZRK_C_ITEM_COND as projection on zrk_i_item_cond {
     @Semantics.amount.currencyCode: 'Currency'
     Price,
     @Semantics.currencyCode: true
+    @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency'} }]
     Currency,
     CreatedBy,
     LastChangedBy,

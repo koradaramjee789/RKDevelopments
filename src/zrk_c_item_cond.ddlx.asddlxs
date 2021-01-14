@@ -24,6 +24,7 @@ annotate entity ZRK_C_ITEM_COND with
   Price;
   @UI: { lineItem:       [ { position: 30 } ],
   identification: [ { position: 30 } ] }
+  @UI.hidden: true
   Currency;
   @UI.hidden: true
   CreatedBy;

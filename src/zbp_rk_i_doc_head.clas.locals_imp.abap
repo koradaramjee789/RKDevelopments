@@ -16,6 +16,8 @@ CLASS lhc_Head DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR Head~GenerateObjectId.
     METHODS ReleaseDoc FOR MODIFY
       IMPORTING keys FOR ACTION Head~ReleaseDoc RESULT result.
+    METHODS reCalcDocAvob FOR MODIFY
+      IMPORTING keys FOR ACTION Head~reCalcDocAvob.
 
 ENDCLASS.
 
@@ -237,6 +239,62 @@ CLASS lhc_Head IMPLEMENTATION.
 
     result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
                                                      %param = <fs_head> ) ).
+
+  ENDMETHOD.
+
+  METHOD reCalcDocAvob.
+
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+      ENTITY Head
+      FIELDS ( Avob CurrencyCode )
+      WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_head)
+      FAILED failed.
+
+    LOOP AT lt_head ASSIGNING FIELD-SYMBOL(<fs_head>).
+
+      CLEAR <fs_head>-Avob.
+
+      READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+          ENTITY Head BY \_Items
+          FIELDS ( Price Currency )
+          WITH VALUE #( ( %tky = <fs_head>-%tky ) )
+          RESULT DATA(lt_items).
+
+      LOOP AT lt_items ASSIGNING FIELD-SYMBOL(<fs_item>).
+
+        READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+            ENTITY Items BY \_Conds
+            FIELDS ( Price Currency )
+            WITH VALUE #( ( %tky = <fs_item>-%tky ) )
+            RESULT DATA(lt_conds).
+
+        CLEAR <fs_item>-Price.
+
+        LOOP AT lt_conds ASSIGNING FIELD-SYMBOL(<fs_conds>).
+
+          <fs_item>-Price = <fs_item>-Price + <fs_conds>-Price.
+
+        ENDLOOP.
+
+        MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+            ENTITY Items
+            UPDATE FIELDS ( Price )
+            WITH CORRESPONDING #( lt_items ).
+
+        <fs_head>-Avob += <fs_item>-Price.
+
+
+      ENDLOOP.
+
+      MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+          ENTITY Head
+          UPDATE FIELDS ( Avob )
+          WITH CORRESPONDING #( lt_head ).
+
+    ENDLOOP.
+
 
   ENDMETHOD.
 
