@@ -14,11 +14,12 @@ annotate view zrk_c_doc_head with
 {
 
   @UI.facet: [ { id:              'Head',
-                   purpose:         #STANDARD,
+                   purpose:        #HEADER , //
                    type:            #IDENTIFICATION_REFERENCE,
                    label:           'Header',
                    position:        10 ,
-                   targetQualifier: 'QHead'},
+                   targetQualifier: 'QHead',
+                   importance: #HIGH},
 
                { id:              'GenInfo',
                    purpose:         #STANDARD,
@@ -69,12 +70,12 @@ annotate view zrk_c_doc_head with
         selectionField: [{ position: 20 }] }
   Title;
   @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT , value: '_RespBuyer' } ] ,
-      identification: [{ position: 30 , label: 'Responsible buyer' ,   qualifier: 'QHead'}] ,
+      identification: [{ position: 30 , label: 'Responsible buyer' ,  importance: #HIGH , qualifier: 'QHead'}] ,
       selectionField: [{ position: 30 }] }
   RespBuyer;
   //    RespBuyerName;
   @UI:{ lineItem: [{ position: 40 , label: 'Supplier' }] ,
-     identification: [{ position: 40 ,label: 'Supplier'  , qualifier: 'QHead'}] ,
+     identification: [{ position: 40 ,label: 'Supplier'  , qualifier: 'QHead' , type: #STANDARD}] ,
      selectionField: [{ position: 40 }] }
   Supplier;
   //    SupplierName;
@@ -98,7 +99,8 @@ annotate view zrk_c_doc_head with
   SendVia;
   @UI.hidden: true
   Status;
-  @UI.lineItem: [{ position: 65 , label: 'Status' , criticality: 'StatusColor', criticalityRepresentation: #WITHOUT_ICON}]
+  @UI:{ lineItem: [{ position: 65 , label: 'Status' , criticality: 'StatusColor', criticalityRepresentation: #WITHOUT_ICON}],
+        selectionField: [{position: 70}] }
   StatusText;
 
   @UI.hidden: true

@@ -24,6 +24,9 @@ etag master LocalLastChangedAt
   action extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
   action ( features : instance ) ReleaseDoc result [1] $self;
 
+  action ( features : instance ) approveDoc result [1] $self;
+  action ( features : instance ) rejectDoc result [1] $self;
+
   determination initializeDoc on modify { create; }
   determination GenerateObjectId on save { create; }
   determination setSendVia on modify { field Supplier; }

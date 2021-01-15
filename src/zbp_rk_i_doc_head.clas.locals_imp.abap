@@ -1,7 +1,7 @@
 CLASS lhc_Head DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
-    METHODS get_instance_features FOR INSTANCE FEATURES
+    METHODS get_features FOR FEATURES
       IMPORTING keys REQUEST requested_features FOR Head RESULT result.
 
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
@@ -18,12 +18,44 @@ CLASS lhc_Head DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR ACTION Head~ReleaseDoc RESULT result.
     METHODS reCalcDocAvob FOR MODIFY
       IMPORTING keys FOR ACTION Head~reCalcDocAvob.
+    METHODS approveDoc FOR MODIFY
+      IMPORTING keys FOR ACTION Head~approveDoc RESULT result.
+
+    METHODS rejectDoc FOR MODIFY
+      IMPORTING keys FOR ACTION Head~rejectDoc RESULT result.
 
 ENDCLASS.
 
 CLASS lhc_Head IMPLEMENTATION.
 
-  METHOD get_instance_features.
+  METHOD get_features.
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+       ENTITY Head
+       FIELDS ( Status )
+       WITH CORRESPONDING #( keys )
+       RESULT DATA(lt_doc_head).
+
+    result = VALUE #( FOR <fs_head> IN lt_doc_head
+
+    (
+
+     %tky = <fs_head>-%tky
+     %action-ReleaseDoc = COND #( WHEN <fs_head>-Status EQ 'RELSD'
+                                  THEN if_abap_behv=>fc-o-disabled
+                                  ELSE if_abap_behv=>fc-o-enabled )
+     %action-Edit = COND #( WHEN <fs_head>-Status EQ 'RELSD'
+                                  THEN if_abap_behv=>fc-o-disabled
+                                  ELSE if_abap_behv=>fc-o-enabled )
+     %action-approveDoc = COND #( WHEN <fs_head>-Status EQ 'AWAPR'
+                                  THEN if_abap_behv=>fc-o-enabled
+                                  ELSE if_abap_behv=>fc-o-disabled )
+     %action-rejectDoc = COND #( WHEN <fs_head>-Status EQ 'AWAPR'
+                                  THEN if_abap_behv=>fc-o-enabled
+                                  ELSE if_abap_behv=>fc-o-disabled )
+    )
+    ) .
+
   ENDMETHOD.
 
   METHOD get_instance_authorizations.
@@ -298,6 +330,62 @@ CLASS lhc_Head IMPLEMENTATION.
     ENDLOOP.
 
 
+  ENDMETHOD.
+
+  METHOD approveDoc.
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+    ENTITY Head
+    FIELDS ( ObjectId ) WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_doc_head).
+
+    CHECK lt_doc_head IS NOT INITIAL.
+
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+     ENTITY Head
+     UPDATE FIELDS ( Status  )
+     WITH VALUE #( FOR <fs_rec> IN lt_doc_head INDEX INTO i
+     ( %tky = <fs_rec>-%tky
+                     Status = 'RELSD'
+       %control-ObjectId = if_abap_behv=>mk-on ) )
+       REPORTED DATA(lt_update_reported).
+
+    reported = CORRESPONDING #( DEEP lt_update_reported ).
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+  ENTITY Head
+  ALL FIELDS  WITH CORRESPONDING #( keys )
+  RESULT lt_doc_head.
+
+    result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
+                                                     %param = <fs_head> ) ).
+  ENDMETHOD.
+
+  METHOD rejectDoc.
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+    ENTITY Head
+    FIELDS ( ObjectId ) WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_doc_head).
+
+    CHECK lt_doc_head IS NOT INITIAL.
+
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+     ENTITY Head
+     UPDATE FIELDS ( Status  )
+     WITH VALUE #( FOR <fs_rec> IN lt_doc_head INDEX INTO i
+     ( %tky = <fs_rec>-%tky
+                     Status = 'REJCT'
+       %control-ObjectId = if_abap_behv=>mk-on ) )
+       REPORTED DATA(lt_update_reported).
+
+    reported = CORRESPONDING #( DEEP lt_update_reported ).
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+  ENTITY Head
+  ALL FIELDS  WITH CORRESPONDING #( keys )
+  RESULT lt_doc_head.
+
+    result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
+                                                     %param = <fs_head> ) ).
   ENDMETHOD.
 
 ENDCLASS.

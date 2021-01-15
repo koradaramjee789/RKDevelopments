@@ -79,9 +79,9 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 
     lt_status = VALUE #(
             ( status = 'SAVED' status_text = 'Saved' status_color = 0 )
-            ( status = 'AWAPR' status_text = 'Awaiting approval' status_color = 3 )
-            ( status = 'REJCT' status_text = 'Rejected' status_color = 2 )
-            ( status = 'RELSD' status_text = 'Released' status_color = 1 )
+            ( status = 'AWAPR' status_text = 'Awaiting approval' status_color = 2 )
+            ( status = 'REJCT' status_text = 'Rejected' status_color = 1 )
+            ( status = 'RELSD' status_text = 'Released' status_color = 3 )
             )  .
 
     MODIFY zrk_md_status FROM TABLE @lt_status.

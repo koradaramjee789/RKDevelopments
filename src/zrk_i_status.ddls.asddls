@@ -3,6 +3,7 @@
 @AbapCatalog.preserveKey: true
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Data definition for Status'
+@ObjectModel.resultSet.sizeCategory: #XS
 define view zrk_i_status as select from zrk_md_status {
     key status as Status,
     status_text as StatusText,

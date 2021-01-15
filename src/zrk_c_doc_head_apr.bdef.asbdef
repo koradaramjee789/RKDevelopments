@@ -1,0 +1,16 @@
+projection;
+
+
+define behavior for ZRK_C_DOC_HEAD_APR //alias <alias_name>
+{
+//  use create;
+  use update;
+//  use delete;
+//
+//  use action extendDoc;
+//  use action ReleaseDoc;
+  use action approveDoc;
+  use action rejectDoc;
+
+
+}

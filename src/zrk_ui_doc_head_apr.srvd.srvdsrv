@@ -1,0 +1,7 @@
+@EndUserText.label: 'Service definition for document approval'
+define service Zrk_ui_doc_head_apr {
+  expose ZRK_C_DOC_HEAD_APR as HeadWI;
+  expose zrk_i_buyer as BuyerF4;
+  expose zrk_i_supplier as SupplierF4;
+  expose I_Country as CountryF4;
+}
