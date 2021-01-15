@@ -52,26 +52,40 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *
 *    MODIFY zrk_md_send_via FROM TABLE @lt_send_via.
 
-    DELETE FROM zrk_md_comm_code .
+*    DELETE FROM zrk_md_comm_code .
+*
+*    DATA : lt_comm_code TYPE TABLE OF zrk_md_comm_code.
+*    lt_comm_code = VALUE #(
+*
+*        ( comm_code =  'CC_525-05' description = 'Archival Storage Materials')
+*        ( comm_code =  'CC_525-50' description = 'Books, Accession')
+*        ( comm_code =  'CC_530-15' description = 'Attache Cases')
+*        ( comm_code =  'CC_540-14' description = 'Lumber, Cedar')
+*        ( comm_code =  'CC_540-87' description = 'Siding, Prefinished Particleboard')
+*        ( comm_code =  'CC_540-77' description = 'Recycled Lumber')
+*        ( comm_code =  'CC_545-46' description = 'Mills, Iron and Steel')
+*        ( comm_code =  'CC_545-54' description = 'Planers, Electric')
+*        ( comm_code =  'CC_545-82' description = 'Shredder, Metal/wood')
+*        ( comm_code =  'CC_555-50' description = 'Stenciling Rollers')
+*        ( comm_code =  'CC_557-20' description = 'Brake Parts/linings')
+*        ( comm_code =  'CC_557-65' description = 'Steering Components and Parts')
+*        ).
+*
+*    MODIFY zrk_md_comm_code FROM TABLE @lt_comm_code.
 
-    DATA : lt_comm_code TYPE TABLE OF zrk_md_comm_code.
-    lt_comm_code = VALUE #(
+    DATA : lt_status TYPE TABLE OF zrk_md_status.
 
-        ( comm_code =  'CC_525-05' description = 'Archival Storage Materials')
-        ( comm_code =  'CC_525-50' description = 'Books, Accession')
-        ( comm_code =  'CC_530-15' description = 'Attache Cases')
-        ( comm_code =  'CC_540-14' description = 'Lumber, Cedar')
-        ( comm_code =  'CC_540-87' description = 'Siding, Prefinished Particleboard')
-        ( comm_code =  'CC_540-77' description = 'Recycled Lumber')
-        ( comm_code =  'CC_545-46' description = 'Mills, Iron and Steel')
-        ( comm_code =  'CC_545-54' description = 'Planers, Electric')
-        ( comm_code =  'CC_545-82' description = 'Shredder, Metal/wood')
-        ( comm_code =  'CC_555-50' description = 'Stenciling Rollers')
-        ( comm_code =  'CC_557-20' description = 'Brake Parts/linings')
-        ( comm_code =  'CC_557-65' description = 'Steering Components and Parts')
-        ).
+    DELETE FROM zrk_md_status    .
 
-    MODIFY zrk_md_comm_code FROM TABLE @lt_comm_code.
+    lt_status = VALUE #(
+            ( status = 'SAVED' status_text = 'Saved' status_color = 0 )
+            ( status = 'AWAPR' status_text = 'Awaiting approval' status_color = 3 )
+            ( status = 'REJCT' status_text = 'Rejected' status_color = 2 )
+            ( status = 'RELSD' status_text = 'Released' status_color = 1 )
+            )  .
+
+    MODIFY zrk_md_status FROM TABLE @lt_status.
+
     COMMIT WORK.
 
 

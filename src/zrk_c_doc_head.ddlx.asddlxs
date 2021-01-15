@@ -79,9 +79,10 @@ annotate view zrk_c_doc_head with
   Supplier;
   //    SupplierName;
   @UI:{ lineItem: [{ position: 50 , label: 'AVoB' }] ,
-   identification: [{ position: 50 ,label: 'AVoB' ,  qualifier: 'QGenInfo'  }] }
+   identification: [{ position: 50 ,label: 'AVoB' ,  qualifier: 'QHead'  }] }
   Avob;
-  //    CurrencyCode;
+  @UI:{ identification: [{position: 60, label: 'Currency', qualifier: 'QGenInfo'}] }
+    CurrencyCode;
   @UI:{ lineItem: [{ position: 70 , label: 'Valid From' }] ,
    identification: [{ position: 70 ,label: 'Valid From' ,  qualifier: 'QGenInfo'  }] }
   @EndUserText.quickInfo: 'This is the date from which agreement starts!'
@@ -95,6 +96,10 @@ annotate view zrk_c_doc_head with
    selectionField: [{ position: 60 }] }
   @Consumption.valueHelpDefinition: [ { entity.element: 'SendVia' , entity.name: 'ZRK_I_SEND_VIA' }]
   SendVia;
+  @UI.hidden: true
+  Status;
+  @UI.lineItem: [{ position: 65 , label: 'Status' , criticality: 'StatusColor', criticalityRepresentation: #WITHOUT_ICON}]
+  StatusText;
 
   @UI.hidden: true
   LastChangedAt;

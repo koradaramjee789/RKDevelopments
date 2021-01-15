@@ -258,7 +258,7 @@ CLASS lhc_Head IMPLEMENTATION.
 
       READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
           ENTITY Head BY \_Items
-          FIELDS ( Price Currency )
+          FIELDS ( Quantity Price Currency )
           WITH VALUE #( ( %tky = <fs_head>-%tky ) )
           RESULT DATA(lt_items).
 
@@ -278,12 +278,14 @@ CLASS lhc_Head IMPLEMENTATION.
 
         ENDLOOP.
 
+        <fs_item>-Price *=  <fs_item>-Quantity .
+
         MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
             ENTITY Items
             UPDATE FIELDS ( Price )
             WITH CORRESPONDING #( lt_items ).
 
-        <fs_head>-Avob += <fs_item>-Price.
+        <fs_head>-Avob +=  <fs_item>-Price   .
 
 
       ENDLOOP.

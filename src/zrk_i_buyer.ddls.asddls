@@ -15,7 +15,7 @@ define view zrk_i_buyer
   association [0..1] to I_Country as _Country on $projection.CountryCode = _Country.Country
 
 {
-      @ObjectModel.text.element: ['LastName']
+      @ObjectModel.text.element: ['FullName']
 
   key Customer.customer_id   as RespBuyerId,
 
@@ -28,17 +28,24 @@ define view zrk_i_buyer
       @Search.fuzzinessThreshold: 0.8
       @Semantics.text: true
       @Semantics.name.fullName: true
+      concat_with_space(Customer.first_name, Customer.last_name, 1)   as FullName,
+      @Semantics.name.familyName: true 
       Customer.last_name     as LastName,
-
+      
+      @Semantics.name.prefix: true
       Customer.title         as Title,
-
+      
+      @Semantics.address.street: true
       Customer.street        as Street,
-
+      
+      @Semantics.address.zipCode: true
       Customer.postal_code   as PostalCode,
-
+      
+      @Semantics.address.city: true
       Customer.city          as City,
 
       @Consumption.valueHelpDefinition: [{entity: { name: 'I_Country', element: 'Country' } }]
+      @Semantics.address.country: true
       Customer.country_code  as CountryCode,
       @Semantics.telephone.type: [#PREF]
       Customer.phone_number  as PhoneNumber,

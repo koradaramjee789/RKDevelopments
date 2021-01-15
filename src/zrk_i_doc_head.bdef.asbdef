@@ -18,7 +18,7 @@ etag master LocalLastChangedAt
   association _Items { create ; with draft; }
 
   field ( numbering : managed, readonly ) DocUuid;
-  field ( readonly ) ObjectId;
+  field ( readonly ) ObjectId, Avob;
   field ( mandatory ) Title, RespBuyer, Supplier;
 
   action extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
@@ -102,12 +102,12 @@ etag master LocalLastChangedAt
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) ItemUuid;
-  field ( readonly : update ) DocUuid, ItemNo ;
-  field ( readonly ) Price;
+  field ( readonly : update ) DocUuid ;
+  field ( readonly ) ItemNo, Price;
   field ( mandatory ) PartNo, CommCode;
 
   determination initializeItem on modify { create; }
-    determination CalculateItemAvob on modify { field Quantity ; }
+  determination CalculateItemAvob on modify { create; field Quantity ; }
 
   mapping for zrk_a_doc_item
   {
@@ -145,8 +145,8 @@ etag master LocalLastChangedAt
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) CondUuid;
-  field ( readonly : update ) ItemUuid, DocUuid;
-  field ( readonly ) Currency;
+//  field ( readonly : update ) ItemUuid, DocUuid;
+  field ( readonly ) ItemUuid, DocUuid, Currency;
 
   determination initializeCondRec on modify { create; }
 

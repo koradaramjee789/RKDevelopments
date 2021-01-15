@@ -35,6 +35,8 @@ define root view entity zrk_c_doc_head
       SendViaT,
       
       Status,
+      _Status.StatusColor,
+      _Status.StatusText,
       
       CreatedBy,
       CreatedAt,
