@@ -198,8 +198,8 @@ CLASS lhc_Head IMPLEMENTATION.
         FIELDS ( ValidFrom ValidTo )
         WITH VALUE #( FOR <fs_doc> IN lt_doc_head
                         ( %tky = <fs_doc>-%tky
-                          ValidFrom = '20200101'
-                          validTo = '20201231' ) )
+                          ValidFrom = '20210101'
+                          validTo = '20211231' ) )
         REPORTED DATA(lt_update_reported).
 
     reported = CORRESPONDING #( DEEP lt_update_reported ).

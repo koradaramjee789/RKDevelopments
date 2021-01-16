@@ -6,9 +6,9 @@
         type: #STANDARD,
         label: 'Contract',
         value: 'ObjectId'
-    },
-    description.value: 'Title',
-    description.type: #STANDARD
+    }
+//    description.value: 'Title',
+//    description.type: #STANDARD
 }
 annotate view zrk_c_doc_head with
 {
@@ -86,7 +86,7 @@ annotate view zrk_c_doc_head with
         selectionField: [{ position: 10 }] }
   ObjectId;
   @UI:{ lineItem: [{ position: 20  }] ,
-        identification: [{ position: 20 , qualifier: 'QHead'}] ,
+        identification: [{ position: 20 , qualifier: 'QGenInfo'}] ,
         selectionField: [{ position: 20 }] }
   Title;
   @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT , value: '_RespBuyer' } ] ,
