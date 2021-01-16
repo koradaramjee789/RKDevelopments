@@ -83,11 +83,12 @@ CLASS lhc_Head IMPLEMENTATION.
 
 
       ELSE.
-        DATA(lv_valid_to) = <fs_key>-%param-extend_till.
+        DATA(lv_new_valid_to) = <fs_key>-%param-extend_till.
       ENDIF.
 
     ENDLOOP.
 
+    " Once the validations are passed, proceed with extending document.
     CHECK lt_keys IS NOT INITIAL.
 
     READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
@@ -99,27 +100,82 @@ CLASS lhc_Head IMPLEMENTATION.
 
     CHECK lt_doc_head IS NOT INITIAL.
 
+    LOOP AT lt_doc_head ASSIGNING FIELD-SYMBOL(<fs_head>).
+
+      " Capture old valid to
+      DATA(lv_old_valid_to) = <fs_head>-ValidTo.
+
+      " Read items from entity
+      READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+          ENTITY Head BY \_Items
+          FIELDS ( ValidFrom ValidTo )
+          WITH VALUE #( ( %tky = <fs_head>-%tky ) )
+          RESULT DATA(lt_items).
+
+      " Loop through items that are running on old valid to
+      LOOP AT lt_items ASSIGNING FIELD-SYMBOL(<fs_item>)
+                            WHERE ValidFrom LE lv_old_valid_to
+                               AND ValidTo GE lv_old_valid_to.
+
+        " Modify item with new valid to
+        <fs_item>-ValidTo = lv_new_valid_to.
+
+        " Read conditions from entity
+        READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+            ENTITY Items BY \_Conds
+            FIELDS ( ValidFrom ValidTo )
+            WITH VALUE #( ( %tky = <fs_item>-%tky ) )
+            RESULT DATA(lt_conds).
+
+            LOOP AT lt_conds ASSIGNING FIELD-SYMBOL(<fs_conds>)
+                                    WHERE ValidFrom LE lv_old_valid_to
+                                     AND ValidTo GE lv_old_valid_to..
+
+              <fs_conds>-ValidTo = lv_new_valid_to.
+
+            ENDLOOP.
+
+            " Modify conditions entity
+            MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+                ENTITY Conds
+                UPDATE FIELDS ( ValidTo )
+                WITH CORRESPONDING #( lt_conds ).
+
+
+      ENDLOOP.
+
+      " Modify Items entity
+      MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+            ENTITY Items
+            UPDATE FIELDS ( ValidTo )
+            WITH CORRESPONDING #( lt_items ).
+
+
+    ENDLOOP.
+
+    " Modify header entity
     MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
         ENTITY Head
         UPDATE
         FIELDS ( ValidTo )
         WITH VALUE #( FOR <fs_doc> IN lt_doc_head
                         ( %tky = <fs_doc>-%tky
-                          validTo = COND #( WHEN lv_valid_to IS NOT INITIAL
-                          THEN lv_valid_to
+                          validTo = COND #( WHEN lv_new_valid_to IS NOT INITIAL
+                          THEN lv_new_valid_to
                           ELSE <fs_doc>-ValidTo )  ) )
         REPORTED DATA(lt_update_reported).
 
     reported = CORRESPONDING #( DEEP lt_update_reported ).
 
+    " Return result to UI
     READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
         ENTITY Head
         ALL FIELDS
         WITH CORRESPONDING #( keys )
         RESULT lt_doc_head.
 
-    result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
-    %param = <fs_head> ) ).
+    result = VALUE #( FOR <fs_doc_head> IN lt_doc_head ( %tky = <fs_doc_head>-%tky
+    %param = <fs_doc_head> ) ).
 
   ENDMETHOD.
 

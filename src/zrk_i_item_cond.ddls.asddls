@@ -17,6 +17,8 @@ define view entity zrk_i_item_cond
       cond_type             as CondType,
       price                 as Price,
       currency              as Currency,
+      valid_from            as ValidFrom,
+      valid_to              as ValidTo,
       created_by            as CreatedBy,
       last_changed_by       as LastChangedBy,
       @Semantics.systemDateTime.localInstanceLastChangedAt: true

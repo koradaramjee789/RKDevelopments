@@ -14,7 +14,7 @@ annotate view zrk_c_doc_head with
 {
 
   @UI.facet: [ { id:              'Head',
-                   purpose:        #HEADER , //
+                   purpose:        #STANDARD,
                    type:            #IDENTIFICATION_REFERENCE,
                    label:           'Header',
                    position:        10 ,
@@ -83,7 +83,7 @@ annotate view zrk_c_doc_head with
    identification: [{ position: 50 ,label: 'AVoB' ,  qualifier: 'QHead'  }] }
   Avob;
   @UI:{ identification: [{position: 60, label: 'Currency', qualifier: 'QGenInfo'}] }
-    CurrencyCode;
+  CurrencyCode;
   @UI:{ lineItem: [{ position: 70 , label: 'Valid From' }] ,
    identification: [{ position: 70 ,label: 'Valid From' ,  qualifier: 'QGenInfo'  }] }
   @EndUserText.quickInfo: 'This is the date from which agreement starts!'

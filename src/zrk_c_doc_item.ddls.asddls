@@ -23,6 +23,8 @@ define view entity ZRK_C_DOC_ITEM
           Price,
           @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency'} }]
           Currency,
+          ValidFrom,
+          ValidTo,
           CreatedBy,
           LastChangedBy,
           LocalLastChangedAt,

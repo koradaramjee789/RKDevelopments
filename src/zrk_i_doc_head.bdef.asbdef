@@ -14,8 +14,8 @@ etag master LocalLastChangedAt
   update;
   delete;
 
-  association _Plant { create ; with draft; }
-  association _Items { create ; with draft; }
+  association _Plant { create; with draft; }
+  association _Items { create; with draft; }
 
   field ( numbering : managed, readonly ) DocUuid;
   field ( readonly ) ObjectId, Avob;
@@ -105,12 +105,12 @@ etag master LocalLastChangedAt
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) ItemUuid;
-  field ( readonly : update ) DocUuid ;
+  field ( readonly : update ) DocUuid;
   field ( readonly ) ItemNo, Price;
   field ( mandatory ) PartNo, CommCode;
 
   determination initializeItem on modify { create; }
-  determination CalculateItemAvob on modify { create; field Quantity ; }
+  determination CalculateItemAvob on modify { create; field Quantity; }
 
   mapping for zrk_a_doc_item
   {
@@ -124,6 +124,8 @@ etag master LocalLastChangedAt
     Unit = unit;
     Price = price;
     Currency = currency;
+    ValidFrom = valid_from;
+    ValidTo = valid_to;
     LocalLastChangedAt = local_last_changed_at;
 
 
@@ -148,12 +150,12 @@ etag master LocalLastChangedAt
   association _Head { with draft; }
 
   field ( numbering : managed, readonly ) CondUuid;
-//  field ( readonly : update ) ItemUuid, DocUuid;
+  //  field ( readonly : update ) ItemUuid, DocUuid;
   field ( readonly ) ItemUuid, DocUuid, Currency;
 
   determination initializeCondRec on modify { create; }
 
-  determination CalculateItemPrice on modify { field Price ; }
+  determination CalculateItemPrice on modify { field Price; }
 
 
   mapping for zrk_a_item_cond
@@ -166,6 +168,8 @@ etag master LocalLastChangedAt
     CondType = cond_type;
     Price = price;
     Currency = currency;
+    ValidFrom = valid_from;
+    ValidTo = valid_to;
     LocalLastChangedAt = local_last_changed_at;
 
   }

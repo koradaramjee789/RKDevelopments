@@ -26,6 +26,12 @@ annotate entity ZRK_C_ITEM_COND with
   identification: [ { position: 30 } ] }
   @UI.hidden: true
   Currency;
+    @UI: { lineItem:       [ { position: 40 , label: 'Valid from'} ],
+  identification: [ { position: 40 , label: 'Valid from'} ] } 
+  validfrom;
+    @UI: { lineItem:       [ { position: 50 , label: 'Valid to'} ],
+  identification: [ { position: 50 , label: 'Valid to'} ] } 
+  validto;
   @UI.hidden: true
   CreatedBy;
   @UI.hidden: true
