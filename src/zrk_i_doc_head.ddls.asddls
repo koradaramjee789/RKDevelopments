@@ -28,6 +28,7 @@ define root view entity zrk_i_doc_head
       send_via              as SendVia,
       _SendVia.SendViaT     as SendViaT,
       status                as Status,
+      cast( _Status.StatusText as zrk_de_status_text ) as StatusText ,
 
       @Semantics.user.createdBy: true
       created_by            as CreatedBy,

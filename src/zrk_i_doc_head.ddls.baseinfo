@@ -4,6 +4,7 @@
 "FROM":
 [
 "ZRK_I_SEND_VIA",
+"ZRK_I_STATUS",
 "ZRK_A_DOC_HEAD"
 ],
 "ASSOCIATED":

@@ -13,13 +13,33 @@
 annotate view zrk_c_doc_head with
 {
 
-  @UI.facet: [ { id:              'Head',
-                   purpose:        #STANDARD,
-                   type:            #IDENTIFICATION_REFERENCE,
-                   label:           'Header',
-                   position:        10 ,
-                   targetQualifier: 'QHead',
-                   importance: #HIGH},
+  @UI.facet: [
+
+                   { id: 'QHeadSnap',
+                   purpose: #HEADER,
+                   type: #FIELDGROUP_REFERENCE,
+                   targetQualifier: 'QHeadSnap',
+                   position: 10 }  ,
+
+                   { id: 'QHeadSnapBS',
+                   purpose: #HEADER,
+                   type: #FIELDGROUP_REFERENCE,
+                   targetQualifier: 'QHeadSnapBS',
+                   position: 13 }  ,
+
+                   { id: 'QHeadSnapA',
+                   purpose: #HEADER,
+                   type: #FIELDGROUP_REFERENCE,
+                   targetQualifier: 'QHeadSnapA',
+                   position: 16 }  ,
+
+  //                    { id:              'Head',
+  //                   purpose:        #STANDARD,
+  //                   type:            #IDENTIFICATION_REFERENCE,
+  //                   label:           'Header',
+  //                   position:        10 ,
+  //                   targetQualifier: 'QHead',
+  //                   importance: #HIGH},
 
                { id:              'GenInfo',
                    purpose:         #STANDARD,
@@ -70,17 +90,21 @@ annotate view zrk_c_doc_head with
         selectionField: [{ position: 20 }] }
   Title;
   @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT , value: '_RespBuyer' } ] ,
-      identification: [{ position: 30 , label: 'Responsible buyer' ,  importance: #HIGH , qualifier: 'QHead'}] ,
-      selectionField: [{ position: 30 }] }
+  //      identification: [{ position: 30 , label: 'Responsible buyer' ,  importance: #HIGH , qualifier: 'QHead'}] ,
+      selectionField: [{ position: 30 }] ,
+      fieldGroup: [{ position: 10 , qualifier: 'QHeadSnapBS' }]} //, type: #AS_CONTACT , value: '_RespBuyer'
   RespBuyer;
   //    RespBuyerName;
   @UI:{ lineItem: [{ position: 40 , label: 'Supplier' }] ,
      identification: [{ position: 40 ,label: 'Supplier'  , qualifier: 'QHead' , type: #STANDARD}] ,
-     selectionField: [{ position: 40 }] }
+     selectionField: [{ position: 40 }] ,
+     fieldGroup: [{ position: 20 , qualifier: 'QHeadSnapBS' }]}
   Supplier;
   //    SupplierName;
   @UI:{ lineItem: [{ position: 50 , label: 'AVoB' }] ,
-   identification: [{ position: 50 ,label: 'AVoB' ,  qualifier: 'QHead'  }] }
+  //   identification: [{ position: 50 ,label: 'AVoB' ,  qualifier: 'QHead'  }]
+   fieldGroup: [{ position: 40 , qualifier: 'QHeadSnapA' }]
+   }
   Avob;
   @UI:{ identification: [{position: 60, label: 'Currency', qualifier: 'QGenInfo'}] }
   CurrencyCode;
@@ -100,7 +124,11 @@ annotate view zrk_c_doc_head with
   @UI.hidden: true
   Status;
   @UI:{ lineItem: [{ position: 65 , label: 'Status' , criticality: 'StatusColor', criticalityRepresentation: #WITHOUT_ICON}],
-        selectionField: [{position: 70}] }
+  //      selectionField: [{position: 70}] ,
+  //        identification: [{position: 70}],
+        fieldGroup: [{ position: 30 , qualifier: 'QHeadSnap' , label: 'Status' ,criticality: 'StatusColor', criticalityRepresentation: #WITHOUT_ICON }] 
+        }
+  //  @Consumption.valueHelpDefinition: [ { entity.element: 'Status' , entity.name: 'zrk_i_status' }]
   StatusText;
 
   @UI.hidden: true

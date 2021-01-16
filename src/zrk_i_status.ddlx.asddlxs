@@ -1,0 +1,11 @@
+@Metadata.layer: #CORE
+annotate entity zrk_i_status
+    with 
+{
+
+//   @UI.hidden: true
+//   StatusText;
+   @UI.hidden: true
+   StatusColor; 
+    
+}
