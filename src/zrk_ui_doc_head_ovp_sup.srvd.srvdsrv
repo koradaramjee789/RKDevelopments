@@ -1,0 +1,4 @@
+@EndUserText.label: 'SD for doc head sup ovp'
+define service ZRK_UI_DOC_HEAD_OVP_SUP {
+  expose zrk_c_doc_head_ovp_sup;
+}
