@@ -29,7 +29,7 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *
 *    commit WORK.
 
-
+*==================================================================================================
 *    DATA lt_plant TYPE TABLE OF zrk_md_plant.
 *
 *    lt_plant = VALUE #( ( plant_id = '1350' name = 'RK Manufactures Pvt, Hyderabad' )
@@ -42,7 +42,7 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *    MODIFY  zrk_md_plant FROM TABLE @lt_plant.
 *
 *    COMMIT WORK.
-
+*==================================================================================================
 *    DATA : lt_send_via TYPE TABLE OF zrk_md_send_via.
 *
 *    lt_send_via = VALUE #( ( send_via = 'EDC' send_via_t = 'EDoc' )
@@ -51,7 +51,7 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *    ( send_via = 'GST' send_via_t = 'Guest' ) ).
 *
 *    MODIFY zrk_md_send_via FROM TABLE @lt_send_via.
-
+*==================================================================================================
 *    DELETE FROM zrk_md_comm_code .
 *
 *    DATA : lt_comm_code TYPE TABLE OF zrk_md_comm_code.
@@ -73,18 +73,35 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 *
 *    MODIFY zrk_md_comm_code FROM TABLE @lt_comm_code.
 
-    DATA : lt_status TYPE TABLE OF zrk_md_status.
+*==================================================================================================
 
-    DELETE FROM zrk_md_status    .
+*    DATA : lt_status TYPE TABLE OF zrk_md_status.
+*
+*    DELETE FROM zrk_md_status    .
+*
+*    lt_status = VALUE #(
+*            ( status = 'SAVED' status_text = 'Saved' status_color = 0 )
+*            ( status = 'AWAPR' status_text = 'Awaiting approval' status_color = 2 )
+*            ( status = 'REJCT' status_text = 'Rejected' status_color = 1 )
+*            ( status = 'RELSD' status_text = 'Released' status_color = 3 )
+*            )  .
+*
+*    MODIFY zrk_md_status FROM TABLE @lt_status.
 
-    lt_status = VALUE #(
-            ( status = 'SAVED' status_text = 'Saved' status_color = 0 )
-            ( status = 'AWAPR' status_text = 'Awaiting approval' status_color = 2 )
-            ( status = 'REJCT' status_text = 'Rejected' status_color = 1 )
-            ( status = 'RELSD' status_text = 'Released' status_color = 3 )
+*==================================================================================================
+
+       DATA : lt_usage TYPE TABLE OF zrk_md_usage.
+
+    DELETE FROM zrk_md_usage    .
+
+    lt_usage = VALUE #(
+            ( usage_id = 'USG01' description = 'Buses'  )
+            ( usage_id = 'USG02' description = 'Cars'  )
+            ( usage_id = 'USG03' description = 'Bikes'  )
+            ( usage_id = 'USG04' description = 'Trucks'  )
             )  .
 
-    MODIFY zrk_md_status FROM TABLE @lt_status.
+    MODIFY zrk_md_usage FROM TABLE @lt_usage.
 
     COMMIT WORK.
 

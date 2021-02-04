@@ -23,6 +23,11 @@ define view entity ZRK_I_DOC_ITEM
            currency              as Currency,
            valid_from            as ValidFrom,
            valid_to              as ValidTo,
+           goods_receipt         as GoodsReceipt,
+           invoice_receipt       as InvoiceReceipt,
+           gr_based_inv_verf     as GrBasedInvVer,
+
+
            created_by            as CreatedBy,
            last_changed_by       as LastChangedBy,
            @Semantics.systemDateTime.localInstanceLastChangedAt: true

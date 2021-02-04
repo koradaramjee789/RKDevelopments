@@ -23,6 +23,8 @@ CLASS lhc_Head DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS rejectDoc FOR MODIFY
       IMPORTING keys FOR ACTION Head~rejectDoc RESULT result.
+    METHODS ForwardDoc FOR MODIFY
+      IMPORTING keys FOR ACTION Head~ForwardDoc RESULT result.
 
 ENDCLASS.
 
@@ -417,6 +419,34 @@ CLASS lhc_Head IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD rejectDoc.
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+    ENTITY Head
+    FIELDS ( ObjectId ) WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_doc_head).
+
+    CHECK lt_doc_head IS NOT INITIAL.
+
+    MODIFY ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+     ENTITY Head
+     UPDATE FIELDS ( Status  )
+     WITH VALUE #( FOR <fs_rec> IN lt_doc_head INDEX INTO i
+     ( %tky = <fs_rec>-%tky
+                     Status = 'REJCT'
+       %control-ObjectId = if_abap_behv=>mk-on ) )
+       REPORTED DATA(lt_update_reported).
+
+    reported = CORRESPONDING #( DEEP lt_update_reported ).
+
+    READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
+  ENTITY Head
+  ALL FIELDS  WITH CORRESPONDING #( keys )
+  RESULT lt_doc_head.
+
+    result = VALUE #( FOR <fs_head> IN lt_doc_head ( %tky = <fs_head>-%tky
+                                                     %param = <fs_head> ) ).
+  ENDMETHOD.
+
+  METHOD ForwardDoc.
     READ ENTITIES OF zrk_i_doc_head IN LOCAL MODE
     ENTITY Head
     FIELDS ( ObjectId ) WITH CORRESPONDING #( keys )

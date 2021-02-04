@@ -17,12 +17,15 @@ etag master LocalLastChangedAt
   association _Plant { create; with draft; }
   association _Items { create; with draft; }
 
+  association _Usage { create; with draft; }
+
   field ( numbering : managed, readonly ) DocUuid;
   field ( readonly ) ObjectId, Avob;
   field ( mandatory ) Title, RespBuyer, Supplier;
 
-  action extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
+  action ( features : instance ) extendDoc parameter ZRK_A_Doc_Extend result [1] $self;
   action ( features : instance ) ReleaseDoc result [1] $self;
+  action ( features : instance ) ForwardDoc result [1] $self;
 
   action ( features : instance ) approveDoc result [1] $self;
   action ( features : instance ) rejectDoc result [1] $self;
@@ -126,6 +129,9 @@ etag master LocalLastChangedAt
     Currency = currency;
     ValidFrom = valid_from;
     ValidTo = valid_to;
+    GoodsReceipt = goods_receipt;
+    InvoiceReceipt = invoice_receipt;
+    GrBasedInvVer = gr_based_inv_verf;
     LocalLastChangedAt = local_last_changed_at;
 
 
@@ -174,4 +180,27 @@ etag master LocalLastChangedAt
 
   }
 
+}
+
+define behavior for ZRK_I_DOC_USAGE alias Usage
+implementation in class ZRK_bp_I_DOC_USAGE unique
+persistent table zrk_a_doc_usage
+draft table zrk_d_doc_usage
+lock dependent by _Head
+authorization dependent by _Head
+etag master LocalLastChangedAt
+
+{
+  update;
+  delete;
+
+  mapping for zrk_a_doc_usage
+  {
+
+    DocUuid = doc_uuid;
+    UsageUuid = usage_uuid;
+    UsageId = usage_id;
+    LocalLastChangedAt = local_last_changed_at;
+
+  }
 }

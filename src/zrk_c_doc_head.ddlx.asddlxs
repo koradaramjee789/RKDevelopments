@@ -10,6 +10,29 @@
 //    description.value: 'Title',
 //    description.type: #STANDARD
 }
+
+@UI.presentationVariant: [{
+//    qualifier: '',
+//    id: '',
+//    text: '',
+//    maxItems: ,
+    sortOrder: [{
+        by: 'ObjectId',
+        direction: #DESC
+    }],
+//    groupBy: [''],
+//    totalBy: [''],
+//    total: [''],
+//    includeGrandTotal: true,
+//    initialExpansionLevel: ,
+//    requestAtLeast: [''],
+    visualizations: [{
+        type: #AS_LINEITEM 
+//        qualifier: '',
+//        element: ''
+    }]
+//    selectionFieldsQualifier: ''
+}]
 annotate view zrk_c_doc_head with
 {
 
@@ -68,12 +91,16 @@ annotate view zrk_c_doc_head with
 
   lineItem: [
 
-  { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 90} ,
-    { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}
-    ]  ,
-  identification : [{ type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100} ,
-    { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 110} ]
-  }
+                { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 90} ,
+                { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100},
+                { type: #FOR_ACTION,  dataAction: 'Forward' , label: 'Forward' , position: 110}
+            ]  ,
+                
+  identification : [                
+                { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 100},
+                { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 110}
+                    ]
+        }
 
   @UI.hidden: true
   DocUuid;
@@ -89,11 +116,19 @@ annotate view zrk_c_doc_head with
         identification: [{ position: 20 , qualifier: 'QGenInfo'}] ,
         selectionField: [{ position: 20 }] }
   Title;
+  @UI:{ // lineItem: [ { position: 30 , label: 'Responsible buyer' ,  value: '_RespBuyer' } ] ,
+        identification: [{ position: 30 , label: 'Responsible buyer' ,   qualifier: 'QHead' , type: #STANDARD}] 
+     // selectionField: [{ position: 30 }] ,
+     // fieldGroup: [{ position: 10 , qualifier: 'QHeadSnapBS'  }]
+     } //, type: #AS_CONTACT , value: '_RespBuyer'
+  RespBuyer;
+  
   @UI:{ lineItem: [ { position: 30 , label: 'Responsible buyer' , type: #AS_CONTACT , value: '_RespBuyer' } ] ,
   //      identification: [{ position: 30 , label: 'Responsible buyer' ,  importance: #HIGH , qualifier: 'QHead'}] ,
       selectionField: [{ position: 30 }] ,
-      fieldGroup: [{ position: 10 , qualifier: 'QHeadSnapBS' }]} //, type: #AS_CONTACT , value: '_RespBuyer'
-  RespBuyer;
+      fieldGroup: [{ position: 15 , qualifier: 'QHeadSnapBS' , type: #AS_CONTACT , value: '_RespBuyer' }]} //, type: #AS_CONTACT , value: '_RespBuyer'
+  QvRespBuyer;
+    
   //    RespBuyerName;
   @UI:{ lineItem: [{ position: 40 , label: 'Supplier' }] ,
      identification: [{ position: 40 ,label: 'Supplier'  , qualifier: 'QHead' , type: #STANDARD}] ,
@@ -135,5 +170,9 @@ annotate view zrk_c_doc_head with
   LastChangedAt;
   @UI.hidden: true
   LocalLastChangedAt;
+   @UI:{ identification: [{position: 160, label: 'Usage', qualifier: 'QGenInfo' , targetElement: '_Usage'}] 
+        }
+  _Usage;
+
 
 }

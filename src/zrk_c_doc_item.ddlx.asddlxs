@@ -3,6 +3,13 @@
   headerInfo: { typeName: 'Item',
                 typeNamePlural: 'Items',
                 title: { type: #STANDARD, value: 'ItemNo' , valueQualifier: 'PartNo' } } }
+
+@UI.presentationVariant:
+        [{ sortOrder: [{
+            by: 'ItemNo',
+            direction: #ASC
+        }] }]
+
 annotate view ZRK_C_DOC_ITEM with
 {
   @UI.facet: [ { id:            'General',
@@ -35,19 +42,24 @@ annotate view ZRK_C_DOC_ITEM with
   @UI: { lineItem:       [ { position: 40 } ],
   identification: [ { position: 40 } ] }
   Quantity;
-//  //  @UI: { lineItem:       [ { position: 50 , label: 'Unit'} ],
-//  //  identification: [ { position: 50 , label: 'Unit'} ] }
-//  @UI.hidden: true
-//  Unit;
+  //  //  @UI: { lineItem:       [ { position: 50 , label: 'Unit'} ],
+  //  //  identification: [ { position: 50 , label: 'Unit'} ] }
+  //  @UI.hidden: true
+  //  Unit;
   @UI: { lineItem:       [ { position: 60 , label: 'Price'} ],
-  identification: [ { position: 60 , label: 'Price'} ] } 
+  identification: [ { position: 60 , label: 'Price'} ] }
   Price;
   @UI: { lineItem:       [ { position: 70 , label: 'Valid from'} ],
-  identification: [ { position: 70 , label: 'Valid from'} ] } 
+  identification: [ { position: 70 , label: 'Valid from'} ] }
   ValidFrom;
-    @UI: { lineItem:       [ { position: 80 , label: 'Valid to'} ],
-  identification: [ { position: 80 , label: 'Valid to'} ] } 
+  @UI: { lineItem:       [ { position: 80 , label: 'Valid to'} ],
+  identification: [ { position: 80 , label: 'Valid to'} ] }
   ValidTo;
-
+  @UI.identification: [{ position: 90 }]
+  GoodsReceipt;
+  @UI.identification: [{ position: 100 }]
+  InvoiceReceipt;
+  @UI.identification: [{ position: 110 }]
+  GrBasedInvVer;
 
 }

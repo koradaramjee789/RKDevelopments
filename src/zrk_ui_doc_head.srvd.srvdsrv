@@ -4,6 +4,7 @@ define service Zrk_ui_doc_head {
   expose ZRK_C_DOC_PLANT as Plant;
   expose ZRK_C_DOC_ITEM as Items;
   expose ZRK_C_ITEM_COND as Conds;
+  expose ZRK_C_DOC_USAGE as Usage;
   expose zrk_i_buyer as BuyerF4;
   expose zrk_i_supplier as SupplierF4;
   expose zrk_i_plant as PlantF4;

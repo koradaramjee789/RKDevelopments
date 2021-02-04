@@ -7,6 +7,8 @@ define root view entity zrk_i_doc_head
   composition [0..*] of zrk_i_doc_plant as _Plant
 
   composition [0..*] of ZRK_I_DOC_ITEM  as _Items
+  
+  composition [0..*] of ZRK_I_DOC_USAGE as _Usage
 
   association [0..1] to zrk_i_supplier  as _Supplier  on $projection.Supplier = _Supplier.SupplierId
   association [0..1] to zrk_i_buyer     as _RespBuyer on $projection.RespBuyer = _RespBuyer.RespBuyerId
@@ -19,6 +21,7 @@ define root view entity zrk_i_doc_head
       object_id             as ObjectId,
       title                 as Title,
       resp_buyer            as RespBuyer,
+      resp_buyer            as QvRespBuyer,
       supplier              as Supplier,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       avob                  as Avob,
@@ -46,6 +49,8 @@ define root view entity zrk_i_doc_head
       _Plant,
 
       _Items,
+      
+      _Usage,
 
       _RespBuyer,
       _Supplier,

@@ -25,6 +25,11 @@ define view entity ZRK_C_DOC_ITEM
           Currency,
           ValidFrom,
           ValidTo,
+          
+          GoodsReceipt,
+          InvoiceReceipt,
+          GrBasedInvVer,
+          
           CreatedBy,
           LastChangedBy,
           LocalLastChangedAt,

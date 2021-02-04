@@ -1,0 +1,9 @@
+@Metadata.layer: #CORE
+annotate entity ZRK_I_USAGE
+    with 
+{
+
+   @UI.hidden: true
+   Description ;
+    
+}

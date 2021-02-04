@@ -16,6 +16,9 @@ define root view entity zrk_c_doc_head
 //      @UI.lineItem: [{type: #AS_CONTACT , value: '_RespBuyer'}]
       RespBuyer,
       _RespBuyer.LastName as RespBuyerName,
+      @ObjectModel.text.element: ['RespBuyerName']
+      @Search.defaultSearchElement: true      
+      QvRespBuyer,
       
       @Consumption.valueHelpDefinition: [{ entity: { name: 'ZRK_I_SUPPLIER', element: 'SupplierId'} }]
       @ObjectModel.text.element: ['SupplierName']
@@ -49,6 +52,7 @@ define root view entity zrk_c_doc_head
       
       _Plant :  redirected to composition child ZRK_C_DOC_PLANT,
       _Items : redirected to composition child ZRK_C_DOC_ITEM,
+      _Usage : redirected to composition child ZRK_C_DOC_USAGE,
       
       _Currency,
       _RespBuyer,
