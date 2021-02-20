@@ -17,7 +17,6 @@ define root view entity zrk_i_doc_head
   association [0..1] to zrk_i_status    as _Status    on $projection.Status = _Status.Status
 {
   key doc_uuid              as DocUuid,
-      object_type           as ObjectType,
       object_id             as ObjectId,
       title                 as Title,
       resp_buyer            as RespBuyer,

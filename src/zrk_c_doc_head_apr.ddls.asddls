@@ -3,7 +3,6 @@
 @Metadata.allowExtensions: true
 define root view entity ZRK_C_DOC_HEAD_APR as projection on zrk_i_doc_head {
     key DocUuid,
-    ObjectType,
     ObjectId,
     Title,
     RespBuyer,

@@ -1,11 +1,35 @@
 @Metadata.layer: #CORE
-annotate entity ZRK_A_Doc_Extend
-    with 
+annotate entity ZRK_A_Doc_Extend with
 {
-   @EndUserText.label: 'New validity to:'
-   @Consumption.defaultValue: '20221231'
-   extend_till; 
-   @EndUserText.label: 'Enter your comments:'
-   comments;
-    
+  
+ // @Consumption.defaultValue: '2022-12-31'
+//  @Consumption.derivation: {
+//      lookupEntity: 'zrk_c_doc_head',
+//      pfcgMapping: '',
+//      resultElement: 'ValidTo',
+//      resultElementHigh: '',
+//      resultHierarchyNode: {
+//          nodeTypeElement: '',
+//          mapping: [{
+//              hierarchyElement: '',
+//              lookupElement: ''
+//          }]
+//      },
+//      binding: [{
+//          targetParameter: '',
+//          targetElement: '',
+//          type: #PARAMETER,
+//          value: ''
+//      }]
+//  }
+  @EndUserText.label: 'New validity to:'
+  extend_till;
+  @EndUserText.label: 'Enter your comments'
+  @Consumption.defaultValue: 'Extending document for next year..'
+  comments;
+  @EndUserText.label: 'New quantity'
+  quantity;
+  @EndUserText.label: 'Unit'  
+  unit;
+
 }

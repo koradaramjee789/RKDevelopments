@@ -1,0 +1,91 @@
+@Metadata.layer: #CORE
+
+
+@UI.chart: [{
+    qualifier: '',
+    title: 'Purchase Overview',
+    description: '',
+    chartType: #COLUMN_STACKED ,
+    dimensions: ['PartNo' , 'Plant', 'ValidFrom'],
+    measures: ['volume'],
+    dimensionAttributes: [{
+        dimension: 'PartNo',
+        role: #CATEGORY,
+        valuesForSequentialColorLevels: [''],
+        emphasizedValues: ['']
+    },
+    {
+        dimension: 'Plant',
+        role: #CATEGORY2,
+        valuesForSequentialColorLevels: [''],
+        emphasizedValues: ['']
+    },
+    {
+        dimension: 'ValidFrom',
+        role: #SERIES,
+        valuesForSequentialColorLevels: [''],
+        emphasizedValues: ['']
+    }],
+    measureAttributes: [{
+        measure: 'volume' ,
+        role: #AXIS_1 ,
+        asDataPoint: true,
+        useSequentialColorLevels: true
+    }]
+//    ,
+//    actions: [{
+//        type: #FOR_INTENT_BASED_NAVIGATION,
+//        label: '',
+//        dataAction: '',
+//        requiresContext: true,
+//        invocationGrouping: #ISOLATED,
+//        semanticObjectAction: ''
+//    }]
+}]
+//@UI.presentationVariant: [{
+//    qualifier: '',
+//    id: '',
+//    text: '',
+//    maxItems: ,
+//    sortOrder: [{
+//        by: '',
+//        direction: 
+//    }],
+//    groupBy: [''],
+//    totalBy: [''],
+//    total: [''],
+//    includeGrandTotal: true,
+//    initialExpansionLevel: ,
+//    requestAtLeast: [''],
+//    visualizations: [{
+//        type: ,
+//        qualifier: '',
+//        element: ''
+//    }],
+//    selectionFieldsQualifier: ''
+//}]
+annotate entity ZRK_C_VOL_OVW
+    with 
+{
+    @UI.lineItem: [{ position: 10 }]
+    @UI.selectionField: [{position: 10}]
+    PartNo;
+    @UI.lineItem: [{ position: 20 }]
+  //  @UI.selectionField: [{position: 20}]
+    Plant;
+    @UI.lineItem: [{ position: 30 }]
+    ValidFrom;
+    @UI.hidden: true
+    ValidTo;
+    @UI.hidden: true
+    Price;
+    @UI.hidden: true
+    CurrencyCode;
+    @UI.hidden: true
+    Quantity;
+    @UI.hidden: true
+    Uom;
+    @UI.lineItem: [{ position: 30 , label: 'Volume'}]
+    volume;
+    
+}

@@ -40,7 +40,6 @@ etag master LocalLastChangedAt
   mapping for zrk_a_doc_head
   {
     DocUuid = doc_uuid;
-    ObjectType = object_type;
     ObjectId = object_id;
     Title = title;
     RespBuyer = resp_buyer;

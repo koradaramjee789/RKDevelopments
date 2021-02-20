@@ -1,0 +1,12 @@
+unmanaged; // implementation in class zbp_rk_i_vol_ovw unique;
+
+define behavior for zrk_i_vol_ovw //alias <alias_name>
+//persistent table <???>
+lock master
+//authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+}

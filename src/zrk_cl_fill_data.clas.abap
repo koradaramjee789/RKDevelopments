@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zrk_cl_fill_data IMPLEMENTATION.
+CLASS ZRK_CL_FILL_DATA IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
@@ -90,18 +90,60 @@ CLASS zrk_cl_fill_data IMPLEMENTATION.
 
 *==================================================================================================
 
-       DATA : lt_usage TYPE TABLE OF zrk_md_usage.
+*       DATA : lt_usage TYPE TABLE OF zrk_md_usage.
+*
+*    DELETE FROM zrk_md_usage    .
+*
+*    lt_usage = VALUE #(
+*            ( usage_id = 'USG01' description = 'Buses'  )
+*            ( usage_id = 'USG02' description = 'Cars'  )
+*            ( usage_id = 'USG03' description = 'Bikes'  )
+*            ( usage_id = 'USG04' description = 'Trucks'  )
+*            )  .
+*
+*    MODIFY zrk_md_usage FROM TABLE @lt_usage.
 
-    DELETE FROM zrk_md_usage    .
+*    DELETE FROM zrk_price_det.
+*
+*    DATA : lt_price_det TYPE TABLE OF zrk_price_det.
+*
+*    lt_price_det = VALUE #(
+*
+*    ( part_no = 'A00012' plant = '2560' valid_from = '20210101' valid_to = '20211231' price = 10 currency_code = 'INR' )
+*    ( part_no = 'A00012' plant = '3420' valid_from = '20210101' valid_to = '20210531' price = 12 currency_code = 'INR' )
+*    ( part_no = 'A00012' plant = '3420' valid_from = '20210601' valid_to = '20211231' price = 15 currency_code = 'INR' )
+*    ( part_no = 'B11123' plant = '3420' valid_from = '20210101' valid_to = '20210331' price = 25 currency_code = 'INR' )
+*    ( part_no = 'B11123' plant = '3420' valid_from = '20210401' valid_to = '20210831' price = 30 currency_code = 'INR' )
+*    ( part_no = 'B11123' plant = '3420' valid_from = '20210901' valid_to = '20211231' price = 40 currency_code = 'INR' )
+*    ( part_no = 'B11123' plant = '1250' valid_from = '20210101' valid_to = '20210930' price = 30 currency_code = 'INR' )
+*    ( part_no = 'B11123' plant = '1250' valid_from = '20211001' valid_to = '20211231' price = 32 currency_code = 'INR' )
+*    ( part_no = 'B11123' plant = '4578' valid_from = '20210101' valid_to = '20211231' price = 35 currency_code = 'INR' )
+*    ( part_no = 'A00012' plant = '8850' valid_from = '20210101' valid_to = '20211231' price = 5 currency_code = 'INR' )
+*     ).
+*
+*
+*    MODIFY zrk_price_det FROM TABLE @lt_price_det.
 
-    lt_usage = VALUE #(
-            ( usage_id = 'USG01' description = 'Buses'  )
-            ( usage_id = 'USG02' description = 'Cars'  )
-            ( usage_id = 'USG03' description = 'Bikes'  )
-            ( usage_id = 'USG04' description = 'Trucks'  )
-            )  .
+    DELETE FROM zrk_quant_det.
 
-    MODIFY zrk_md_usage FROM TABLE @lt_usage.
+    DATA : lt_quant_det TYPE TABLE OF zrk_quant_det.
+
+    lt_quant_det = VALUE #(
+
+    ( part_no = 'A00012' plant = '2560' valid_from = '20210101' valid_to = '20211231' quantity = 50 uom   = 'EA' )
+    ( part_no = 'A00012' plant = '3420' valid_from = '20210101' valid_to = '20210531' quantity = 20 uom   = 'EA' )
+    ( part_no = 'A00012' plant = '3420' valid_from = '20210601' valid_to = '20211231' quantity = 30 uom   = 'EA' )
+    ( part_no = 'B11123' plant = '3420' valid_from = '20210101' valid_to = '20210331' quantity = 25 uom   = 'KG' )
+    ( part_no = 'B11123' plant = '3420' valid_from = '20210401' valid_to = '20210831' quantity = 50 uom   = 'KG' )
+    ( part_no = 'B11123' plant = '3420' valid_from = '20210901' valid_to = '20211231' quantity = 25 uom   = 'KG' )
+    ( part_no = 'B11123' plant = '1250' valid_from = '20210101' valid_to = '20210930' quantity = 40 uom   = 'KG' )
+    ( part_no = 'B11123' plant = '1250' valid_from = '20211001' valid_to = '20211231' quantity = 20 uom   = 'KG' )
+    ( part_no = 'B11123' plant = '4578' valid_from = '20210101' valid_to = '20211231' quantity = 55 uom   = 'KG' )
+    ( part_no = 'A00012' plant = '8850' valid_from = '20210101' valid_to = '20211231' quantity = 80 uom   = 'PC' )
+     ).
+
+
+    MODIFY zrk_quant_det FROM TABLE @lt_quant_det.
 
     COMMIT WORK.
 

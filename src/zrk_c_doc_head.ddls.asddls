@@ -6,7 +6,6 @@ define root view entity zrk_c_doc_head
   as projection on zrk_i_doc_head
 {
   key DocUuid,
-      ObjectType,
       @Search.defaultSearchElement: true
       ObjectId,
       Title,

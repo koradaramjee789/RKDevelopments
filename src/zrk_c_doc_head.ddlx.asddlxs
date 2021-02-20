@@ -92,8 +92,8 @@ annotate view zrk_c_doc_head with
   lineItem: [
 
                 { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 90} ,
-                { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100},
-                { type: #FOR_ACTION,  dataAction: 'Forward' , label: 'Forward' , position: 110}
+                { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}
+              //  { type: #FOR_ACTION,  dataAction: 'Forward' , label: 'Forward' , position: 110}
             ]  ,
                 
   identification : [                
@@ -105,8 +105,6 @@ annotate view zrk_c_doc_head with
   @UI.hidden: true
   DocUuid;
 
-  @UI.hidden: true
-  ObjectType;
 
   @UI:{ lineItem: [{ position: 10 , label: 'Contract No.' }] ,
         identification: [  { position: 10, label: 'Contract No.' , hidden: true  }] ,
@@ -170,7 +168,7 @@ annotate view zrk_c_doc_head with
   LastChangedAt;
   @UI.hidden: true
   LocalLastChangedAt;
-   @UI:{ identification: [{position: 160, label: 'Usage', qualifier: 'QGenInfo' , targetElement: '_Usage'}] 
+   @UI:{ identification: [{ value: '_Usage.UsageId',position: 160, label: 'Usage', qualifier: 'QGenInfo' }] --, targetElement: '_Usage'
         }
   _Usage;
 

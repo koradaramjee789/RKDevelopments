@@ -1,0 +1,4 @@
+@EndUserText.label: 'SD for volume overview'
+define service ZRK_UI_VOL_OVW {
+  expose ZRK_C_VOL_OVW as VolOverView;
+}
