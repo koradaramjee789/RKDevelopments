@@ -1,0 +1,5 @@
+CLASS zrk_bp_i_doc_usage DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zrk_i_doc_head.
+ENDCLASS.
+
+CLASS zrk_bp_i_doc_usage IMPLEMENTATION.
+ENDCLASS.

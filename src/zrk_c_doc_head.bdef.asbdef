@@ -12,6 +12,7 @@ define behavior for zrk_c_doc_head alias Head
 
   use action ReleaseDoc ;
   use action extendDoc ;
+  use action ForwardDoc ;
 
 
 }
