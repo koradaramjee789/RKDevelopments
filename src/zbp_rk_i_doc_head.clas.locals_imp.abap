@@ -46,15 +46,15 @@ CLASS lhc_Head IMPLEMENTATION.
      %action-ReleaseDoc = COND #( WHEN <fs_head>-Status EQ 'RELSD'
                                   THEN if_abap_behv=>fc-o-disabled
                                   ELSE if_abap_behv=>fc-o-enabled )
-     %action-Edit = COND #( WHEN <fs_head>-Status EQ 'RELSD'
-                                  THEN if_abap_behv=>fc-o-disabled
-                                  ELSE if_abap_behv=>fc-o-enabled )
+     %action-Edit = if_abap_behv=>fc-o-enabled
      %action-approveDoc = COND #( WHEN <fs_head>-Status EQ 'AWAPR'
                                   THEN if_abap_behv=>fc-o-enabled
                                   ELSE if_abap_behv=>fc-o-disabled )
      %action-rejectDoc = COND #( WHEN <fs_head>-Status EQ 'AWAPR'
                                   THEN if_abap_behv=>fc-o-enabled
                                   ELSE if_abap_behv=>fc-o-disabled )
+     %action-extendDoc =  if_abap_behv=>fc-o-enabled
+     %action-ForwardDoc = if_abap_behv=>fc-o-enabled
     )
     ) .
 

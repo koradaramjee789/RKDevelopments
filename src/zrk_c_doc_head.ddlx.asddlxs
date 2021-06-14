@@ -89,15 +89,15 @@ annotate view zrk_c_doc_head with
 
   @UI: {
 
-  lineItem: [
-
-                { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 90} ,
-                { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100}
-              //  { type: #FOR_ACTION,  dataAction: 'Forward' , label: 'Forward' , position: 110}
+  lineItem: [               
+                { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 100},
+                { type: #FOR_ACTION,  dataAction: 'ForwardDoc' , label: 'Forward' , position: 110},
+                { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 120  } 
             ]  ,
                 
   identification : [                
                 { type: #FOR_ACTION,  dataAction: 'ExtendDoc' , label: 'Extend' , position: 100},
+                { type: #FOR_ACTION,  dataAction: 'ForwardDoc' , label: 'Forward' , position: 105},
                 { type: #FOR_ACTION,  dataAction: 'ReleaseDoc' , label: 'Release' , position: 110}
                     ]
         }

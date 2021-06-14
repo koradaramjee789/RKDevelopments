@@ -1,0 +1,64 @@
+managed implementation in class zbp_rk_i_pr_head unique;
+
+define behavior for zrk_i_pr_head alias _Head
+persistent table zrk_a_pr_head
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _Items { create; }
+
+  field ( numbering : managed , readonly ) HeadUuid  ;
+
+  mapping for zrk_a_pr_head
+  {
+    HeadUuid = head_uuid;
+    DocId = doc_id;
+    Title = title;
+    RespBuyer = resp_buyer;
+    Status = status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for zrk_i_pr_item alias _PrItem
+persistent table zrk_a_pr_item
+lock dependent by _Head
+authorization dependent by _Head
+etag master LastChangedAt
+{
+  update;
+  delete;
+
+  association _Head;
+
+   field ( numbering : managed , readonly ) ItemUuid  ;
+  field ( readonly ) HeadUuid;
+
+  mapping for zrk_a_pr_item
+  {
+    ItemUuid = item_uuid;
+    HeadUuid = head_uuid;
+    ItemNo = item_no;
+    partNo = part_no;
+    CommCode = comm_code;
+    Quantity = quantity;
+    Unit = unit;
+    Price = price;
+    Currency = currency;
+    DeliveryDate = delivery_date;
+    Supplier = supplier;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

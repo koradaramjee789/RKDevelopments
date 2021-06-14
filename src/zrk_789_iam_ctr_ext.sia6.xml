@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SIA6" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <SIA6>
+    <MAIN_OBJECT>
+     <NAME>ZRK_789_IAM_CTR_EXT</NAME>
+     <TYPE>SIA6</TYPE>
+     <DESCRIPTION>IAM App for contract app</DESCRIPTION>
+     <RESPONSIBLE>CB0000000363</RESPONSIBLE>
+     <MASTER_LANGUAGE>EN</MASTER_LANGUAGE>
+     <MASTER_SYSTEM>TRL</MASTER_SYSTEM>
+     <PACKAGE_REF>
+      <PACKAGE_NAME>ZRK_789_OWN</PACKAGE_NAME>
+     </PACKAGE_REF>
+    </MAIN_OBJECT>
+    <APP_ID>ZRK_789_IAM_CTR_EXT</APP_ID>
+    <APP_TYPE>EXT</APP_TYPE>
+    <ABAP_LANGUAGE_VERSION>5</ABAP_LANGUAGE_VERSION>
+    <SERVICE>
+     <item>
+      <REL_NAME>ZRK_UI_DOC_HEAD_O2_0001</REL_NAME>
+      <REL_TYPE>IWSG</REL_TYPE>
+      <APP_ID>ZRK_789_IAM_CTR_EXT</APP_ID>
+      <SRVC_NAME>10E1A41066DE23976FAE061348ED00</SRVC_NAME>
+      <SRVC_TYPE>HT</SRVC_TYPE>
+      <TEXT>SB for purchase contracts</TEXT>
+      <TYPE_TEXT>OData V2 (deprecated)</TYPE_TEXT>
+     </item>
+    </SERVICE>
+   </SIA6>
+  </asx:values>
+ </asx:abap>
+</abapGit>

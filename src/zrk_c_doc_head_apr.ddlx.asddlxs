@@ -7,7 +7,10 @@ annotate entity ZRK_C_DOC_HEAD_APR with
 
   { type: #FOR_ACTION,  dataAction: 'ApproveDoc' , label: 'Approve' , position: 90  } 
 //  { type: #FOR_ACTION,  dataAction: 'RejectDoc' , label: 'Reject' , position: 100}
-  ] }
+  ],
+  identification: [{ type: #FOR_ACTION,  dataAction: 'ApproveDoc' , label: 'Approve' , position: 90 }]
+   }
+  
 
   @UI.hidden: true
   DocUuid;

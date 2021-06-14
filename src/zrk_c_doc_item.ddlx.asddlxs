@@ -16,14 +16,16 @@ annotate view ZRK_C_DOC_ITEM with
                  purpose:       #STANDARD,
                  type:          #IDENTIFICATION_REFERENCE,
                  label:         'General',
-                 position:      10 },
-
-               { id:              'Conditions',
-                 purpose:         #STANDARD,
-                 type:            #LINEITEM_REFERENCE,
-                 label:           'Conditions',
-                 position:        20,
-                 targetElement:   '_Conds'}  ]
+                 position:      10 }
+//                 ,
+//
+//               { id:              'Conditions',
+//                 purpose:         #STANDARD,
+//                 type:            #LINEITEM_REFERENCE,
+//                 label:           'Conditions',
+//                 position:        20,
+//                 targetElement:   '_Conds'} 
+                  ]
 
   @UI.hidden: true
   ItemUuid;
@@ -35,6 +37,7 @@ annotate view ZRK_C_DOC_ITEM with
   ItemNo;
   @UI: { lineItem:       [ { position: 20 } ],
   identification: [ { position: 20 } ] }
+  @Consumption.valueHelpDefinition: [{ entity : { name: 'ZCE_RAP_PRODUCTS_789' , element: 'Product' }  }]
   PartNo;
   @UI: { lineItem:       [ { position: 30 } ],
   identification: [ { position: 30 } ] }

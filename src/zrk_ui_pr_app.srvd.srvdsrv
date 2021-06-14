@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for PR'
+define service Zrk_ui_pr_app {
+  expose ZRK_C_PR_HEAD as PrHead;
+  expose zrk_c_pr_item as PrItem;
+}

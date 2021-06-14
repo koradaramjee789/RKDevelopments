@@ -13,4 +13,5 @@ define service Zrk_ui_doc_head {
   expose zrk_i_comm_code as CommCodeF4;
   expose I_UnitOfMeasureText as UnitDtl;
   expose zrk_i_unit as UnitF4;
+  expose ZCE_RAP_PRODUCTS_789 as PartsF4;
 }

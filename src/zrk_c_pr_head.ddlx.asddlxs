@@ -1,0 +1,64 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Purchase Requisition',
+    typeNamePlural: 'Purchase Requisitions',
+    title:{
+    label: 'Purchase Requisition',
+    value: 'DocId'
+    }
+}
+
+annotate entity ZRK_C_PR_HEAD with
+{
+
+  @UI.facet: [{
+        id:              'GenInfo',
+         purpose:         #STANDARD,
+         type:            #IDENTIFICATION_REFERENCE,
+         label:           'General Information',
+         position:        10
+   },
+
+  {
+        id:              'Items',
+         purpose:         #STANDARD,
+         type:            #LINEITEM_REFERENCE,
+         label:           'Items',
+         position:        20,
+         targetElement: '_Items'
+   }]
+
+  @UI.hidden: true
+  HeadUuid;
+  @UI:{
+      lineItem: [{ position: 10 }],
+      identification: [{ position: 10 }]
+  }
+  DocId;
+  @UI:{
+  lineItem: [{ position: 20 }],
+  identification: [{ position: 20 }]
+  }
+  Title;
+  @UI:{
+  lineItem: [{ position: 30 }],
+  identification: [{ position: 30 }]
+  }
+  RespBuyer;
+  @UI:{
+  lineItem: [{ position: 40 , label: 'Status' }],
+  identification: [{ position: 40 , label: 'Status' }]
+  }
+  Status;
+  @UI.hidden: true
+  CreatedBy;
+  @UI.hidden: true
+  CreatedAt;
+  @UI.hidden: true
+  LastChangedBy;
+  @UI.hidden: true
+  LastChangedAt;
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+}

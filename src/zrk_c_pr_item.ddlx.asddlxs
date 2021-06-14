@@ -1,0 +1,82 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Purchase Requisition item',
+    typeNamePlural: 'Purchase Requisition Items',
+    title:{
+    label: 'Part No.',
+    value: 'PartNo'
+    }
+}
+annotate entity zrk_c_pr_item
+    with 
+{
+
+  @UI.facet: [{
+        id:              'GenInfo',
+         purpose:         #STANDARD,
+         type:            #IDENTIFICATION_REFERENCE,
+         label:           'General Information',
+         position:        10
+   }]
+   
+@UI.hidden: true
+    ItemUuid;
+    @UI.hidden: true
+    HeadUuid;
+        @UI:{ 
+        lineItem: [{ position: 10 }],
+        identification: [{ position: 10 }]
+    }
+    ItemNo;
+        @UI:{ 
+        lineItem: [{ position: 20 }],
+        identification: [{ position: 20 }]
+    }
+    PartNo;
+        @UI:{ 
+        lineItem: [{ position: 30 }],
+        identification: [{ position: 30 }]
+    }
+    CommCode;
+        @UI:{ 
+        lineItem: [{ position: 40 }],
+        identification: [{ position: 40 }]
+    }
+    Quantity;
+        @UI:{ 
+        lineItem: [{ position: 50 }],
+        identification: [{ position: 50 }]
+    }
+    Unit;
+        @UI:{ 
+        lineItem: [{ position: 60 }],
+        identification: [{ position: 60 }]
+    }
+    Price;
+        @UI:{ 
+        lineItem: [{ position: 70 }],
+        identification: [{ position: 70 }]
+    }
+    Currency;
+        @UI:{ 
+        lineItem: [{ position: 80 }],
+        identification: [{ position: 80 }]
+    }
+    DeliveryDate;
+        @UI:{ 
+        lineItem: [{ position: 90 }],
+        identification: [{ position: 90 }]
+    }
+    Supplier;
+    @UI.hidden: true
+    CreatedBy;
+    @UI.hidden: true
+    CreatedAt;
+    @UI.hidden: true
+    LastChangedBy;
+    @UI.hidden: true
+    LastChangedAt;
+    @UI.hidden: true
+    LocalLastChangedAt;
+    
+}

@@ -1,0 +1,18 @@
+projection;
+
+define behavior for ZRK_C_PR_HEAD alias _head
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Items { create; }
+}
+
+define behavior for zrk_c_pr_item alias _Item
+{
+  use update;
+  use delete;
+
+  use association _Head;
+}

@@ -8,7 +8,7 @@ define root view entity zrk_i_doc_head
 
   composition [0..*] of ZRK_I_DOC_ITEM  as _Items
   
-  composition [0..*] of ZRK_I_DOC_USAGE as _Usage
+  composition [1..*] of ZRK_I_DOC_USAGE as _Usage
 
   association [0..1] to zrk_i_supplier  as _Supplier  on $projection.Supplier = _Supplier.SupplierId
   association [0..1] to zrk_i_buyer     as _RespBuyer on $projection.RespBuyer = _RespBuyer.RespBuyerId
@@ -30,7 +30,7 @@ define root view entity zrk_i_doc_head
       send_via              as SendVia,
       _SendVia.SendViaT     as SendViaT,
       status                as Status,
-      cast( _Status.StatusText as zrk_de_status_text ) as StatusText ,
+      _Status.StatusText  as StatusText ,
 
       @Semantics.user.createdBy: true
       created_by            as CreatedBy,
